@@ -1,0 +1,45 @@
+PODS:
+  - AFNetworking (2.4.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.4.1)
+  - AFNetworking/Security (2.4.1)
+  - AFNetworking/Serialization (2.4.1)
+  - AFNetworking/UIKit (2.4.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - MMProgressHUD (0.2.3)
+  - NSLogger (1.5)
+  - pop (1.0.7)
+  - UIColor-Hex (0.1.1)
+  - UIImage+ImageWithColor (1.2)
+
+DEPENDENCIES:
+  - AFNetworking
+  - MMProgressHUD
+  - NSLogger
+  - pop
+  - UIColor-Hex
+  - UIImage+ImageWithColor
+
+SPEC CHECKSUMS:
+  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  MMProgressHUD: 416686cee2e9af16691e82ebfdcf7caf1dd6f621
+  NSLogger: 84ed0bf00985df483153ce344d8171c9ec83be2b
+  pop: 2f14a1ea61339767af9e66741b418c831b3844df
+  UIColor-Hex: 658893617840e46ee5ac786e094b67786d9cb19d
+  UIImage+ImageWithColor: caf25af9e1718b2972d68a8b0f3ae704a0928681
+
+COCOAPODS: 0.34.4
