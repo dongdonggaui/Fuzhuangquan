@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		064985EA19F93AC40040FCCB /* FZQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 064985E919F93AC40040FCCB /* FZQViewController.m */; };
+		064985ED19F93ADF0040FCCB /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 064985EC19F93ADF0040FCCB /* HomeViewController.m */; };
+		064985F619F93D840040FCCB /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 064985F319F93D840040FCCB /* libWeChatSDK.a */; };
 		094E281619F9175F00502FE1 /* HomeRankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 094E281519F9175F00502FE1 /* HomeRankCell.m */; };
 		0955222C19F922450014E157 /* HomeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0955222B19F922450014E157 /* HomeListCell.m */; };
 		09F70D6B19F7D55B003B4E8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F70D6A19F7D55B003B4E8F /* main.m */; };
@@ -32,7 +35,6 @@
 		09F70DAC19F7D55B003B4E8F /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 09F70DAB19F7D55B003B4E8F /* WeiboSDK.bundle */; };
 		09F70DB019F7D55B003B4E8F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F70DAF19F7D55B003B4E8F /* libWeChatSDK.a */; };
 		09F70DB419F7D55B003B4E8F /* HLYThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F70DB319F7D55B003B4E8F /* HLYThemeManager.m */; };
-		09F70DB719F7D55B003B4E8F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F70DB619F7D55B003B4E8F /* ViewController.m */; };
 		09F70DBA19F7D55B003B4E8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09F70DB819F7D55B003B4E8F /* Main.storyboard */; };
 		09F70DBC19F7D55B003B4E8F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F70DBB19F7D55B003B4E8F /* Images.xcassets */; };
 		09F70DBF19F7D55B003B4E8F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F70DBD19F7D55B003B4E8F /* LaunchScreen.xib */; };
@@ -51,6 +53,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		064985E819F93AC40040FCCB /* FZQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FZQViewController.h; path = ViewControllers/Base/FZQViewController.h; sourceTree = "<group>"; };
+		064985E919F93AC40040FCCB /* FZQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FZQViewController.m; path = ViewControllers/Base/FZQViewController.m; sourceTree = "<group>"; };
+		064985EB19F93ADF0040FCCB /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = ViewControllers/Home/HomeViewController.h; sourceTree = "<group>"; };
+		064985EC19F93ADF0040FCCB /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = ViewControllers/Home/HomeViewController.m; sourceTree = "<group>"; };
+		064985F319F93D840040FCCB /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		064985F419F93D840040FCCB /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		064985F519F93D840040FCCB /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		094E281419F9175F00502FE1 /* HomeRankCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeRankCell.h; path = ViewControllers/Home/HomeRankCell.h; sourceTree = "<group>"; };
 		094E281519F9175F00502FE1 /* HomeRankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeRankCell.m; path = ViewControllers/Home/HomeRankCell.m; sourceTree = "<group>"; };
 		094E281719F91B7200502FE1 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
@@ -99,8 +108,6 @@
 		09F70DAF19F7D55B003B4E8F /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = Components/ShareManager/Weibo/libWeChatSDK.a; sourceTree = "<group>"; };
 		09F70DB219F7D55B003B4E8F /* HLYThemeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HLYThemeManager.h; path = Components/ThemeManager/HLYThemeManager.h; sourceTree = "<group>"; };
 		09F70DB319F7D55B003B4E8F /* HLYThemeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HLYThemeManager.m; path = Components/ThemeManager/HLYThemeManager.m; sourceTree = "<group>"; };
-		09F70DB519F7D55B003B4E8F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		09F70DB619F7D55B003B4E8F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		09F70DB919F7D55B003B4E8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		09F70DBB19F7D55B003B4E8F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		09F70DBE19F7D55B003B4E8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -121,6 +128,7 @@
 				09F70DAA19F7D55B003B4E8F /* libWeiboSDK.a in Frameworks */,
 				09F70DB019F7D55B003B4E8F /* libWeChatSDK.a in Frameworks */,
 				5893759A02EFEFB6B5CB6F1F /* libPods.a in Frameworks */,
+				064985F619F93D840040FCCB /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +142,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		064985EE19F93D310040FCCB /* Weixin */ = {
+			isa = PBXGroup;
+			children = (
+				064985F319F93D840040FCCB /* libWeChatSDK.a */,
+				064985F419F93D840040FCCB /* WXApi.h */,
+				064985F519F93D840040FCCB /* WXApiObject.h */,
+			);
+			name = Weixin;
+			path = Components/ShareManager/Weixin;
+			sourceTree = "<group>";
+		};
 		094E281219F9154300502FE1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +168,8 @@
 				094E281519F9175F00502FE1 /* HomeRankCell.m */,
 				0955222A19F922450014E157 /* HomeListCell.h */,
 				0955222B19F922450014E157 /* HomeListCell.m */,
+				064985EB19F93ADF0040FCCB /* HomeViewController.h */,
+				064985EC19F93ADF0040FCCB /* HomeViewController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -187,8 +208,6 @@
 				09F70D6D19F7D55B003B4E8F /* AppDelegate.m */,
 				094E281719F91B7200502FE1 /* Header.h */,
 				09F70D7119F7D55B003B4E8F /* Localizable.strings */,
-				09F70DB519F7D55B003B4E8F /* ViewController.h */,
-				09F70DB619F7D55B003B4E8F /* ViewController.m */,
 				09F70DB819F7D55B003B4E8F /* Main.storyboard */,
 				09F70DBB19F7D55B003B4E8F /* Images.xcassets */,
 				09F70DBD19F7D55B003B4E8F /* LaunchScreen.xib */,
@@ -213,9 +232,9 @@
 		09F70D7319F7D55B003B4E8F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				094E281319F9171500502FE1 /* Home */,
-				094E281219F9154300502FE1 /* Common */,
 				09F70D7419F7D55B003B4E8F /* Base */,
+				094E281219F9154300502FE1 /* Common */,
+				094E281319F9171500502FE1 /* Home */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -225,6 +244,8 @@
 			children = (
 				09F70D7519F7D55B003B4E8F /* HLYViewController.h */,
 				09F70D7619F7D55B003B4E8F /* HLYViewController.m */,
+				064985E819F93AC40040FCCB /* FZQViewController.h */,
+				064985E919F93AC40040FCCB /* FZQViewController.m */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -304,6 +325,7 @@
 				09F70D9D19F7D55B003B4E8F /* TQShareActionSheet.m */,
 				09F70D9F19F7D55B003B4E8F /* TQShareManager.h */,
 				09F70DA019F7D55B003B4E8F /* TQShareManager.m */,
+				064985EE19F93D310040FCCB /* Weixin */,
 				09F70DA219F7D55B003B4E8F /* QQ */,
 				09F70DA719F7D55B003B4E8F /* Weibo */,
 			);
@@ -527,11 +549,12 @@
 				09F70D6E19F7D55B003B4E8F /* AppDelegate.m in Sources */,
 				09F70D8B19F7D55B003B4E8F /* TQTextField.m in Sources */,
 				09F70D8F19F7D55B003B4E8F /* HLYPullToRefreshLoadingView.m in Sources */,
-				09F70DB719F7D55B003B4E8F /* ViewController.m in Sources */,
+				064985EA19F93AC40040FCCB /* FZQViewController.m in Sources */,
 				09F70DA119F7D55B003B4E8F /* TQShareManager.m in Sources */,
 				09F70DB419F7D55B003B4E8F /* HLYThemeManager.m in Sources */,
 				09F70D6B19F7D55B003B4E8F /* main.m in Sources */,
 				09F70D9219F7D55B003B4E8F /* HLYPullToRefreshManager.m in Sources */,
+				064985ED19F93ADF0040FCCB /* HomeViewController.m in Sources */,
 				09F70D9519F7D55B003B4E8F /* UIView+Frame.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,6 +688,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Fuzhuangquan/Components/ShareManager/Weibo",
+					"$(PROJECT_DIR)/Fuzhuangquan/Components/ShareManager/Weixin",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -685,6 +709,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Fuzhuangquan/Components/ShareManager/Weibo",
+					"$(PROJECT_DIR)/Fuzhuangquan/Components/ShareManager/Weixin",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

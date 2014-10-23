@@ -236,7 +236,7 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
     }
     
     CGFloat footerTop = MAX([scrollView hly_height], scrollView.contentSize.height);
-
+    
     CGFloat offsetY = scrollView.contentOffset.y;
     CGFloat topBaseLine = 0;
     CGFloat topMaxLine = -kHLYPullToRefreshHeaderHeight;

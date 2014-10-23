@@ -12,7 +12,6 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WXApi.h"
 #import "WeiboSDK.h"
-#import "AFNetworking.h"
 
 static NSString * const TQShareManagerTencentAppId = @"1101217493";
 static NSString * const TQShareManagerTencentAppSecret = @"quS3El51AQ9ecYWL";
@@ -144,7 +143,7 @@ NSString * const TQShareManagerDidSendToQQFailedNotification = @"com.hly.sharema
         if(image) {
             thumbnail = [self thumbImageWithImage:image limitSize:CGSizeMake(150.f, 150.f)];
         } else {
-            thumbnail = [self thumbImageWithImage:[UIImage skinImageNamed:@"icon.png"] limitSize:CGSizeMake(150.f, 150.f)];
+            thumbnail = [self thumbImageWithImage:[UIImage imageNamed:@"icon.png"] limitSize:CGSizeMake(150.f, 150.f)];
         }
         
         title = title ? : [self defaultShareTitle];
@@ -197,7 +196,7 @@ NSString * const TQShareManagerDidSendToQQFailedNotification = @"com.hly.sharema
                 SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:newsObj];
                 QQApiSendResultCode sent = [QQApiInterface sendReq:req];
                 [self handleQQSendResult:sent];
-                DLog(@"qq sent code --> %d", sent);
+                NSLog(@"qq sent code --> %d", sent);
                 
                 break;
             }
@@ -249,7 +248,7 @@ NSString * const TQShareManagerDidSendToQQFailedNotification = @"com.hly.sharema
 
 - (UIImage *)defaultShareImage
 {
-    return [self thumbImageWithImage:[UIImage skinImageNamed:@"icon.png"] limitSize:CGSizeMake(150.f, 150.f)];
+    return [self thumbImageWithImage:[UIImage imageNamed:@"icon.png"] limitSize:CGSizeMake(150.f, 150.f)];
 }
 
 
@@ -260,7 +259,7 @@ NSString * const TQShareManagerDidSendToQQFailedNotification = @"com.hly.sharema
     BOOL enabled = ([WXApi isWXAppInstalled] && [WXApi isWXAppSupportApi]);
     if(!enabled)
     {
-        [DGAlertView showAlertTitle:@"您还没有安装微信或者您微信的版本不支持分享功能!" message:nil alertStyle:AlertStyleFail];
+        NSLog(@"您还没有安装微信或者您微信的版本不支持分享功能!");
     }
     return enabled;
 }
@@ -293,33 +292,33 @@ NSString * const TQShareManagerDidSendToQQFailedNotification = @"com.hly.sharema
     {
         case EQQAPIAPPNOTREGISTED:
         {
-            DLog(@"App未注册");
+            NSLog(@"App未注册");
         }
         case EQQAPIMESSAGECONTENTINVALID:
         case EQQAPIMESSAGECONTENTNULL:
         case EQQAPIMESSAGETYPEINVALID:
         {
-            DLog(@"发送参数错误");
+            NSLog(@"发送参数错误");
         }
         case EQQAPIQQNOTINSTALLED:
         {
-            DLog(@"未安装手Q");
+            NSLog(@"未安装手Q");
         }
         case EQQAPIQQNOTSUPPORTAPI:
         {
-            DLog(@"API接口不支持");
+            NSLog(@"API接口不支持");
         }
         case EQQAPISENDFAILD:
         {
-            DLog(@"发送失败");
+            NSLog(@"发送失败");
         }
         case EQQAPIQZONENOTSUPPORTTEXT:
         {
-            DLog(@"空间分享不支持纯文本分享，请使用图文分享");
+            NSLog(@"空间分享不支持纯文本分享，请使用图文分享");
         }
         case EQQAPIQZONENOTSUPPORTIMAGE:
         {
-            DLog(@"空间分享不支持纯图片分享，请使用图文分享");
+            NSLog(@"空间分享不支持纯图片分享，请使用图文分享");
             [[NSNotificationCenter defaultCenter] postNotificationName:TQShareManagerDidSendToQQFailedNotification object:nil];
             break;
         }
@@ -331,46 +330,33 @@ NSString * const TQShareManagerDidSendToQQFailedNotification = @"com.hly.sharema
     }
 }
 
-- (AFHTTPClient *)weiboClient
-{
-    static AFHTTPClient *sharedWeiboClient = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        if (!sharedWeiboClient) {
-            sharedWeiboClient = [AFHTTPClient clientWithBaseURL:[NSURL URLWithString:TQShareManagerWeiboShareUrl]];
-        }
-    });
-    
-    return sharedWeiboClient;
-}
-
 #pragma mark -
 #pragma mark - tecent
-- (void)tencentDidLogin
+- (void)tencentDiNSLogin
 {
-    DLog(@"tencent did login");
+    NSLog(@"tencent did login");
 }
 
 - (void)tencentDidNotLogin:(BOOL)cancelled
 {
-    DLog(@"cancelled --> %@", cancelled ? @"YES" : @"NO");
+    NSLog(@"cancelled --> %@", cancelled ? @"YES" : @"NO");
 }
 
 - (void)tencentDidNotNetWork
 {
-    DLog(@"unreachable");
+    NSLog(@"unreachable");
 }
 
 - (BOOL)onTencentReq:(TencentApiReq *)req
 {
-    DLog(@"req --> %@", req);
+    NSLog(@"req --> %@", req);
     
     return YES;
 }
 
 - (BOOL)onTencentResp:(TencentApiResp *)resp
 {
-    DLog(@"resp --> %@", resp);
+    NSLog(@"resp --> %@", resp);
     
     return YES;
 }
@@ -457,7 +443,7 @@ NSString * const TQShareManagerDidSendToQQFailedNotification = @"com.hly.sharema
 #pragma mark - weixin
 - (void)onResp:(BaseResp *)resp
 {
-    DLog(@"weixin on response");
+    NSLog(@"weixin on response");
     if (resp.errCode == WXSuccess) {
         [[NSNotificationCenter defaultCenter] postNotificationName:TQShareManagerDidSendToWeixinSuccessNotification object:nil];
     } else {
@@ -467,7 +453,7 @@ NSString * const TQShareManagerDidSendToQQFailedNotification = @"com.hly.sharema
 
 - (void)onReq:(BaseReq *)req
 {
-    DLog(@"weixin on request");
+    NSLog(@"weixin on request");
 }
 
 @end

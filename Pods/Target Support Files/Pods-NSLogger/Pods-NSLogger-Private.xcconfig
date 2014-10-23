@@ -1,5 +1,0 @@
-#include "Pods-NSLogger.xcconfig"
-GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1 ${PODS_NSLOGGER_GCC_PREPROCESSOR_DEFINITIONS}
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/NSLogger" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/AFNetworking" "${PODS_ROOT}/Headers/Public/MMProgressHUD" "${PODS_ROOT}/Headers/Public/NSLogger" "${PODS_ROOT}/Headers/Public/SDWebImage" "${PODS_ROOT}/Headers/Public/UIColor-Hex" "${PODS_ROOT}/Headers/Public/UIImage+ImageWithColor" "${PODS_ROOT}/Headers/Public/pop"
-OTHER_LDFLAGS = ${PODS_NSLOGGER_OTHER_LDFLAGS} -ObjC
-PODS_ROOT = ${SRCROOT}

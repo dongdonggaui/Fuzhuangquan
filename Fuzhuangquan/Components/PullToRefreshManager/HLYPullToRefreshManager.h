@@ -1,161 +1,57 @@
 //
-//  HLYViewController.m
-//  MyWeChat
+//  HLYPullToRefreshManager.h
+//  HLYPullToRefreshManager
 //
-//  Created by 黄露洋 on 13-11-7.
-//  Copyright (c) 2013年 黄露洋. All rights reserved.
+//  Created by huangluyang on 14-8-24.
+//  Copyright (c) 2014年 huangluyang. All rights reserved.
 //
 
-#import "HLYViewController.h"
-#import "UIView+Frame.h"
+#import <Foundation/Foundation.h>
+#import "HLYPullToRefreshLoadingView.h"
 
-const NSString *kNotificationControllerDidPushed = @"kNotificationControllerDidPushed";
+@interface HLYPullToRefreshManager : NSObject <UITableViewDelegate>
 
-@interface HLYViewController ()
+// callback
+@property (nonatomic, copy) void (^loadNew)();
+@property (nonatomic, copy) void (^loadMore)();
+@property (nonatomic, copy) void (^didSelectedTableViewAtIndexPath)(UITableView *tableView, NSIndexPath *indexPath);
+@property (nonatomic, copy) CGFloat (^cellHeightForTableViewAtIndexPath)(UITableView *tableView, NSIndexPath *indexPath);
+@property (nonatomic, copy) CGFloat (^estimatedCellHeightForTableViewAtIndexPath)(UITableView *tableView, NSIndexPath *indexPath);
+@property (nonatomic, copy) UIView * (^headerViewForTableViewInSection)(UITableView *tableView, NSInteger section);
+@property (nonatomic, copy) CGFloat (^headerViewHeightForTableViewInSection)(UITableView *tableView, NSInteger section);
 
-@end
+// state
+@property (nonatomic, unsafe_unretained) BOOL enableLoadNew;
+@property (nonatomic, unsafe_unretained) BOOL enableLoadMore;
+@property (nonatomic, unsafe_unretained) BOOL loading;
 
-@implementation HLYViewController
+// UI
+@property (nonatomic, weak, readonly) UITableView *tableView;
 
-- (void)dealloc
-{
-    self.passValue = nil;
-    self.hlyLeftBarButtonItem = nil;
-    self.hlyRightBarButtonItem = nil;
-}
+// 自定义加载视图背景
+@property (nonatomic, strong) UIView *headerBackgroundView;
+@property (nonatomic, strong) UIView *footerBackgroundView;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+// 自定义下拉刷新和上拉加载的效果只需要集成HLYPullToRefreshLoadingView，重写setState:方法，并设置以下两个属性即可
+@property (nonatomic, strong) HLYPullToRefreshLoadingView *headerView;
+@property (nonatomic, strong) HLYPullToRefreshLoadingView *footerView;
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	
-    self.view.backgroundColor = [UIColor whiteColor];
-}
+/**
+ *  初始化
+ */
+- (instancetype)initWithTableView:(UITableView *)tableView;
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    if (self.navigationController != nil && [self.navigationController.viewControllers objectAtIndex:0] != self) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:(NSString *)kNotificationControllerDidPushed object:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], @"isRoot", nil]];
-    } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:(NSString *)kNotificationControllerDidPushed object:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], @"isRoot", nil]];
-    }
-    
-    // analytics
-//    [MobClick beginLogPageView:NSStringFromClass(self.class)];
-}
+/**
+ *  自动下拉刷新
+ */
+- (void)triggerLoadNew;
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-//    [self.topIndicateView showMessage:@"服务器错误，请稍候再试"];
-}
+/**
+ *  结束加载，播放复原动画
+ */
+- (void)endLoad;
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    // analytics
-//    [MobClick endLogPageView:NSStringFromClass(self.class)];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - setters & getters
-- (UIBarButtonItem *)hlyLeftBarButtonItem
-{
-    if (_hlyLeftBarButtonItem == nil) {
-        UIImage *image = [ThemeImage imageNamed:@"ic_actionbar_back.png"];
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button hly_setWidth:image.size.width];
-        [button hly_setHeight:image.size.height];
-        [button setBackgroundImage:image forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(hly_leftItemDidTapped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        _hlyLeftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    }
-    
-    return _hlyLeftBarButtonItem;
-}
-
-
-#pragma mark -
-#pragma mark - public
-
-- (UIBarButtonItem *)hlyRightBarButtonItem
-{
-    if (_hlyRightBarButtonItem == nil) {
-        UIImage *image = [ThemeImage imageNamed:@"ic_actionbar_search.png"];
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button hly_setWidth:image.size.width];
-        [button hly_setHeight:image.size.height];
-        [button setBackgroundImage:image forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(hly_rightItemDidTapped:) forControlEvents:UIControlEventTouchUpInside];
-        
-        _hlyRightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    }
-    
-    return _hlyRightBarButtonItem;
-}
-
-- (HWDAppDelegate *)hly_appDelegate {
-    return (HWDAppDelegate *)[[UIApplication sharedApplication] delegate];
-}
-
-- (NSUserDefaults *)hly_userDefaults
-{
-    return [NSUserDefaults standardUserDefaults];
-}
-
-- (CGFloat)hly_topLayoutGuideLength
-{
-    CGFloat offset = 0;
-    if ([self respondsToSelector:@selector(topLayoutGuide)]) {
-        offset = [self.topLayoutGuide length];
-    }
-    
-    return offset;
-}
-
-- (void)hly_leftItemDidTapped:(id)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)hly_rightItemDidTapped:(id)sender
-{
-    
-}
-
-- (BOOL)hly_needCustomLeftItem
-{
-    return NO;
-//    return self.navigationController != nil && [self.navigationController.viewControllers indexOfObject:self] != 0;
-}
-
-- (void)hly_presentLoginViewCompleted:(void (^)(void))completed
-{
-    UIStoryboard *loginStoryboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-    UIViewController *vc = [loginStoryboard instantiateInitialViewController];
-    [self presentViewController:vc animated:YES completion:^{
-        if (completed != nil) {
-            completed();
-        }
-    }];
-}
+- (void)setHeaderUpdateTimeIdentifier:(NSString *)identifier;
+- (void)setFooterUpdateTimeIdentifier:(NSString *)identifier;
 
 @end
