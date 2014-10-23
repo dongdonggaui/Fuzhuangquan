@@ -23,6 +23,9 @@ PODS:
   - MMProgressHUD (0.2.3)
   - NSLogger (1.5)
   - pop (1.0.7)
+  - SDWebImage (3.7.1):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.7.1)
   - UIColor-Hex (0.1.1)
   - UIImage+ImageWithColor (1.2)
 
@@ -31,6 +34,7 @@ DEPENDENCIES:
   - MMProgressHUD
   - NSLogger
   - pop
+  - SDWebImage
   - UIColor-Hex
   - UIImage+ImageWithColor
 
@@ -39,6 +43,7 @@ SPEC CHECKSUMS:
   MMProgressHUD: 416686cee2e9af16691e82ebfdcf7caf1dd6f621
   NSLogger: 84ed0bf00985df483153ce344d8171c9ec83be2b
   pop: 2f14a1ea61339767af9e66741b418c831b3844df
+  SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
   UIColor-Hex: 658893617840e46ee5ac786e094b67786d9cb19d
   UIImage+ImageWithColor: caf25af9e1718b2972d68a8b0f3ae704a0928681
 

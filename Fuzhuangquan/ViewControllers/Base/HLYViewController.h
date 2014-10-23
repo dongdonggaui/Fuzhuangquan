@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TQSlideController.h"
 
 @class HWDAppDelegate;
 @interface HLYViewController : UIViewController
