@@ -195,12 +195,12 @@
                                             <outlet property="factoryImageView" destination="1oD-Ed-Z4i" id="o2Z-8Z-Hf1"/>
                                             <outlet property="factoryLabel" destination="CDV-hR-mGw" id="m5s-wA-bMs"/>
                                             <outlet property="patternMakerImageView" destination="Co0-LE-Zvd" id="zUS-yu-Pgt"/>
-                                            <outlet property="patternMakerLable" destination="YQY-et-syz" id="tUf-aX-RPN"/>
+                                            <outlet property="patternMakerLabel" destination="YQY-et-syz" id="T4k-26-Ch2"/>
                                             <outlet property="retailerImageView" destination="g8w-oZ-awN" id="QjD-lO-aYN"/>
                                             <outlet property="retailerLabel" destination="F9X-St-6cU" id="XvJ-rj-4qf"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" rowHeight="124" id="CBc-NR-UTm" customClass="HomeListCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" rowHeight="138" id="CBc-NR-UTm" customClass="HomeListCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CBc-NR-UTm" id="0ir-Qh-rWS">
@@ -300,7 +300,7 @@
                                                         </mask>
                                                     </variation>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广东-广州" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yD-Cq-cq7">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广东-广州" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6yD-Cq-cq7">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -343,22 +343,33 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="南天纸样" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="480-DD-NZF">
+                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="7hY-Iu-9le" firstAttribute="leading" secondItem="lye-a0-Ld0" secondAttribute="trailing" constant="8" id="0vo-Vp-MoS"/>
-                                                <constraint firstItem="mpW-xR-xrW" firstAttribute="trailing" secondItem="0ir-Qh-rWS" secondAttribute="trailingMargin" id="19D-Su-fYc"/>
+                                                <constraint firstItem="mpW-xR-xrW" firstAttribute="trailing" secondItem="0ir-Qh-rWS" secondAttribute="trailing" id="19D-Su-fYc">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="-10"/>
+                                                </constraint>
                                                 <constraint firstItem="lye-a0-Ld0" firstAttribute="centerY" secondItem="7hY-Iu-9le" secondAttribute="centerY" constant="-1" id="2am-Px-ORL"/>
+                                                <constraint firstItem="CDE-DI-Z7X" firstAttribute="top" secondItem="480-DD-NZF" secondAttribute="bottom" constant="8" id="5cQ-3g-NHR"/>
                                                 <constraint firstItem="21W-G6-vzV" firstAttribute="leading" secondItem="t7O-k5-qbD" secondAttribute="trailing" constant="8" id="5jd-nN-y9L"/>
                                                 <constraint firstItem="6yD-Cq-cq7" firstAttribute="leading" secondItem="CDE-DI-Z7X" secondAttribute="trailing" constant="8" id="9qv-UK-lmN"/>
                                                 <constraint firstItem="hbD-jJ-G1p" firstAttribute="top" secondItem="0ir-Qh-rWS" secondAttribute="topMargin" constant="8" id="AQD-rF-Jjq"/>
                                                 <constraint firstItem="21W-G6-vzV" firstAttribute="centerY" secondItem="t7O-k5-qbD" secondAttribute="centerY" constant="0.5" id="EH8-fi-2eo"/>
                                                 <constraint firstItem="nuz-RP-08c" firstAttribute="leading" secondItem="21W-G6-vzV" secondAttribute="trailing" constant="8" id="How-CZ-lMK"/>
+                                                <constraint firstItem="480-DD-NZF" firstAttribute="top" secondItem="6xx-ao-Q4x" secondAttribute="bottom" constant="8" id="IKt-io-bhA"/>
                                                 <constraint firstItem="6xx-ao-Q4x" firstAttribute="top" secondItem="hbD-jJ-G1p" secondAttribute="top" constant="5" id="LJW-6H-pDw"/>
                                                 <constraint firstItem="HH9-f7-sM9" firstAttribute="leading" secondItem="nuz-RP-08c" secondAttribute="trailing" constant="8" id="NZh-yh-ayf"/>
                                                 <constraint firstItem="mpW-xR-xrW" firstAttribute="top" secondItem="tgN-zg-Cr1" secondAttribute="bottom" constant="1" id="PHJ-uI-TVw"/>
                                                 <constraint firstItem="nuz-RP-08c" firstAttribute="centerY" secondItem="HH9-f7-sM9" secondAttribute="centerY" constant="-1" id="PtW-HA-t8J"/>
                                                 <constraint firstItem="tgN-zg-Cr1" firstAttribute="top" secondItem="0ir-Qh-rWS" secondAttribute="topMargin" constant="11" id="SBT-Xn-pma"/>
-                                                <constraint firstItem="CDE-DI-Z7X" firstAttribute="top" secondItem="6xx-ao-Q4x" secondAttribute="bottom" constant="8" id="UlG-wm-WfU"/>
+                                                <constraint firstItem="480-DD-NZF" firstAttribute="trailing" secondItem="6xx-ao-Q4x" secondAttribute="trailing" id="UPy-he-ZRe"/>
+                                                <constraint firstItem="480-DD-NZF" firstAttribute="leading" secondItem="6xx-ao-Q4x" secondAttribute="leading" constant="1" id="Y7w-iY-L6j"/>
                                                 <constraint firstItem="tgN-zg-Cr1" firstAttribute="leading" secondItem="mpW-xR-xrW" secondAttribute="leading" id="cXG-Ca-B3h"/>
                                                 <constraint firstItem="hbD-jJ-G1p" firstAttribute="leading" secondItem="0ir-Qh-rWS" secondAttribute="leadingMargin" constant="8" id="f5s-3f-lxB"/>
                                                 <constraint firstItem="t7O-k5-qbD" firstAttribute="top" secondItem="CDE-DI-Z7X" secondAttribute="bottom" constant="8" id="gYF-5Z-sfC"/>
@@ -386,34 +397,38 @@
                                                     <exclude reference="HH9-f7-sM9"/>
                                                     <exclude reference="lye-a0-Ld0"/>
                                                     <exclude reference="7hY-Iu-9le"/>
+                                                    <exclude reference="480-DD-NZF"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="5jd-nN-y9L"/>
-                                                    <exclude reference="EH8-fi-2eo"/>
-                                                    <exclude reference="vsB-yC-Rtf"/>
+                                                    <exclude reference="AQD-rF-Jjq"/>
+                                                    <exclude reference="f5s-3f-lxB"/>
                                                     <exclude reference="LJW-6H-pDw"/>
                                                     <exclude reference="mw9-QY-aXH"/>
                                                     <exclude reference="ueo-QF-gdK"/>
                                                     <exclude reference="zqR-kT-d2x"/>
-                                                    <exclude reference="9qv-UK-lmN"/>
-                                                    <exclude reference="0vo-Vp-MoS"/>
-                                                    <exclude reference="NZh-yh-ayf"/>
-                                                    <exclude reference="19D-Su-fYc"/>
-                                                    <exclude reference="PHJ-uI-TVw"/>
-                                                    <exclude reference="SBT-Xn-pma"/>
-                                                    <exclude reference="cXG-Ca-B3h"/>
-                                                    <exclude reference="sAr-zE-cvn"/>
-                                                    <exclude reference="UlG-wm-WfU"/>
+                                                    <exclude reference="IKt-io-bhA"/>
+                                                    <exclude reference="UPy-he-ZRe"/>
+                                                    <exclude reference="Y7w-iY-L6j"/>
+                                                    <exclude reference="5cQ-3g-NHR"/>
                                                     <exclude reference="lfX-HT-F55"/>
                                                     <exclude reference="qOI-0M-QQW"/>
-                                                    <exclude reference="AQD-rF-Jjq"/>
-                                                    <exclude reference="f5s-3f-lxB"/>
+                                                    <exclude reference="gYF-5Z-sfC"/>
+                                                    <exclude reference="9qv-UK-lmN"/>
+                                                    <exclude reference="5jd-nN-y9L"/>
+                                                    <exclude reference="EH8-fi-2eo"/>
+                                                    <exclude reference="vsB-yC-Rtf"/>
+                                                    <exclude reference="How-CZ-lMK"/>
+                                                    <exclude reference="PtW-HA-t8J"/>
+                                                    <exclude reference="NZh-yh-ayf"/>
                                                     <exclude reference="2am-Px-ORL"/>
                                                     <exclude reference="iuB-Pk-Y17"/>
                                                     <exclude reference="wcQ-60-EhQ"/>
-                                                    <exclude reference="How-CZ-lMK"/>
-                                                    <exclude reference="PtW-HA-t8J"/>
-                                                    <exclude reference="gYF-5Z-sfC"/>
+                                                    <exclude reference="0vo-Vp-MoS"/>
+                                                    <exclude reference="SBT-Xn-pma"/>
+                                                    <exclude reference="cXG-Ca-B3h"/>
+                                                    <exclude reference="sAr-zE-cvn"/>
+                                                    <exclude reference="19D-Su-fYc"/>
+                                                    <exclude reference="PHJ-uI-TVw"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -430,34 +445,38 @@
                                                     <include reference="HH9-f7-sM9"/>
                                                     <include reference="lye-a0-Ld0"/>
                                                     <include reference="7hY-Iu-9le"/>
+                                                    <include reference="480-DD-NZF"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="5jd-nN-y9L"/>
-                                                    <include reference="EH8-fi-2eo"/>
-                                                    <include reference="vsB-yC-Rtf"/>
+                                                    <include reference="AQD-rF-Jjq"/>
+                                                    <include reference="f5s-3f-lxB"/>
                                                     <include reference="LJW-6H-pDw"/>
                                                     <include reference="mw9-QY-aXH"/>
                                                     <include reference="ueo-QF-gdK"/>
                                                     <include reference="zqR-kT-d2x"/>
-                                                    <include reference="9qv-UK-lmN"/>
-                                                    <include reference="0vo-Vp-MoS"/>
-                                                    <include reference="NZh-yh-ayf"/>
-                                                    <include reference="19D-Su-fYc"/>
-                                                    <include reference="PHJ-uI-TVw"/>
-                                                    <include reference="SBT-Xn-pma"/>
-                                                    <include reference="cXG-Ca-B3h"/>
-                                                    <include reference="sAr-zE-cvn"/>
-                                                    <include reference="UlG-wm-WfU"/>
+                                                    <include reference="IKt-io-bhA"/>
+                                                    <include reference="UPy-he-ZRe"/>
+                                                    <include reference="Y7w-iY-L6j"/>
+                                                    <include reference="5cQ-3g-NHR"/>
                                                     <include reference="lfX-HT-F55"/>
                                                     <include reference="qOI-0M-QQW"/>
-                                                    <include reference="AQD-rF-Jjq"/>
-                                                    <include reference="f5s-3f-lxB"/>
+                                                    <include reference="gYF-5Z-sfC"/>
+                                                    <include reference="9qv-UK-lmN"/>
+                                                    <include reference="5jd-nN-y9L"/>
+                                                    <include reference="EH8-fi-2eo"/>
+                                                    <include reference="vsB-yC-Rtf"/>
+                                                    <include reference="How-CZ-lMK"/>
+                                                    <include reference="PtW-HA-t8J"/>
+                                                    <include reference="NZh-yh-ayf"/>
                                                     <include reference="2am-Px-ORL"/>
                                                     <include reference="iuB-Pk-Y17"/>
                                                     <include reference="wcQ-60-EhQ"/>
-                                                    <include reference="How-CZ-lMK"/>
-                                                    <include reference="PtW-HA-t8J"/>
-                                                    <include reference="gYF-5Z-sfC"/>
+                                                    <include reference="0vo-Vp-MoS"/>
+                                                    <include reference="SBT-Xn-pma"/>
+                                                    <include reference="cXG-Ca-B3h"/>
+                                                    <include reference="sAr-zE-cvn"/>
+                                                    <include reference="19D-Su-fYc"/>
+                                                    <include reference="PHJ-uI-TVw"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -508,7 +527,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="22.5" y="66.75"/>
+            <point key="canvasLocation" x="22.5" y="66"/>
         </scene>
     </scenes>
     <resources>

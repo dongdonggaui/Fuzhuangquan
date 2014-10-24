@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class HWDAppDelegate;
+@class AppDelegate;
 @interface HLYViewController : UIViewController
 
 @property (nonatomic, strong) UIBarButtonItem *hlyLeftBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *hlyRightBarButtonItem;
 @property (nonatomic, strong) id passValue;
 
-- (HWDAppDelegate *)hly_appDelegate;
+- (AppDelegate *)hly_appDelegate;
 - (NSUserDefaults *)hly_userDefaults;
 - (CGFloat)hly_topLayoutGuideLength;
 - (void)hly_leftItemDidTapped:(id)sender;

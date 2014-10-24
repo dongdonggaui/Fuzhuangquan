@@ -49,6 +49,19 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
         
         self.enableLoadNew = YES;
         self.enableLoadMore = YES;
+        self.topLayoutGuide = 0;
+        
+        // constraints
+        _footerView.translatesAutoresizingMaskIntoConstraints = NO;
+        _headerView.translatesAutoresizingMaskIntoConstraints = NO;
+        NSDictionary *viewsDic = NSDictionaryOfVariableBindings(_footerView, _headerView, _tableView);
+        NSDictionary *metricsDic = @{@"headerHeight": @(kHLYPullToRefreshHeaderHeight),
+                                     @"footerHeight": @(kHLYPullToRefreshFooterHeight)};
+        
+        [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_headerView(==_tableView)]-0-|" options:0 metrics:nil views:viewsDic]];
+        [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_headerView(==headerHeight)]-0-|" options:0 metrics:metricsDic views:viewsDic]];
+        [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_footerView(==_tableView)]-0-|" options:0 metrics:nil views:viewsDic]];
+        [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_footerView(==footerHeight)]" options:0 metrics:metricsDic views:viewsDic]];
     }
     
     return self;
@@ -238,8 +251,8 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
     CGFloat footerTop = MAX([scrollView hly_height], scrollView.contentSize.height);
     
     CGFloat offsetY = scrollView.contentOffset.y;
-    CGFloat topBaseLine = 0;
-    CGFloat topMaxLine = -kHLYPullToRefreshHeaderHeight;
+    CGFloat topBaseLine = -self.topLayoutGuide;
+    CGFloat topMaxLine = -self.topLayoutGuide - kHLYPullToRefreshHeaderHeight;
     CGFloat bottomBaseLine = footerTop - CGRectGetHeight(scrollView.frame);
     CGFloat bottomMaxLine = bottomBaseLine + kHLYPullToRefreshHeaderHeight;
     
@@ -264,7 +277,7 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
         self.headerView.state = HLYPullToRefreshStateLoading;
         if (self.tableView) {
             [UIView animateWithDuration:0.25 animations:^{
-                self.tableView.contentInset = UIEdgeInsetsMake(kHLYPullToRefreshHeaderHeight, 0, 0, 0);
+                self.tableView.contentInset = UIEdgeInsetsMake(kHLYPullToRefreshHeaderHeight + self.topLayoutGuide, 0, 0, 0);
             }];
         }
         if (self.loadNew) {

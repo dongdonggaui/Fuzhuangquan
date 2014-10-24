@@ -8,6 +8,8 @@
 
 #import "HomeRankCell.h"
 #import <UIImageView+WebCache.h>
+#import <CoreGraphics/CoreGraphics.h>
+#import "UIView+Frame.h"
 
 @interface HomeRankCell ()
 
@@ -25,8 +27,26 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+}
+
+- (void)updateConstraints
+{
+    [super updateConstraints];
     
+    self.patternMakerImageView.layer.cornerRadius = ceilf([self.patternMakerImageView hly_width] / 2);
+    self.patternMakerImageView.clipsToBounds = YES;
+    self.factoryImageView.layer.cornerRadius = ceilf([self.factoryImageView hly_width] / 2);
+    self.factoryImageView.clipsToBounds = YES;
+    self.retailerImageView.layer.cornerRadius = ceilf([self.retailerImageView hly_width] / 2);
+    self.retailerImageView.clipsToBounds = YES;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
     
+    [self.contentView setNeedsLayout];
+    [self.contentView layoutIfNeeded];
 }
 
 - (void)configureCellWithPatternMakerImage:(NSString *)pmImagePath

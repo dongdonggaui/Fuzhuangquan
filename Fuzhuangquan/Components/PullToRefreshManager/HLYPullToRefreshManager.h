@@ -19,11 +19,17 @@
 @property (nonatomic, copy) CGFloat (^estimatedCellHeightForTableViewAtIndexPath)(UITableView *tableView, NSIndexPath *indexPath);
 @property (nonatomic, copy) UIView * (^headerViewForTableViewInSection)(UITableView *tableView, NSInteger section);
 @property (nonatomic, copy) CGFloat (^headerViewHeightForTableViewInSection)(UITableView *tableView, NSInteger section);
+@property (nonatomic, copy) NSString * (^titleForTableViewInSection)(UITableView *tableView, NSInteger section);
 
 // state
 @property (nonatomic, unsafe_unretained) BOOL enableLoadNew;
 @property (nonatomic, unsafe_unretained) BOOL enableLoadMore;
 @property (nonatomic, unsafe_unretained) BOOL loading;
+
+/**
+ *  针对iOS7以上的UIViewcontroller的topLayoutGuide的补偿值，默认为0
+ */
+@property (nonatomic, unsafe_unretained) CGFloat topLayoutGuide;
 
 // UI
 @property (nonatomic, weak, readonly) UITableView *tableView;

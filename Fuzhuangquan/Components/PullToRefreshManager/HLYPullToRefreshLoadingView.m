@@ -56,10 +56,29 @@ static NSString * const HLYPullToRefreshUpdateTimeUserDefaultsKey = @"com.hly.us
         _animateImageLayer = [[CALayer alloc] init];
         _animateImageLayer.frame = CGRectMake(0, 0, image.size.width, image.size.height);
         _animateImageLayer.contents = (id)image.CGImage;
-        [self.layer addSublayer:_animateImageLayer];
+        UIView *animateImageLayerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, image.size.width + 10, image.size.height + 10)];
+        [animateImageLayerView.layer addSublayer:_animateImageLayer];
+        [self addSubview:animateImageLayerView];
         
         _juhua = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [self addSubview:_juhua];
+        
+        // constraints
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+        _stateLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        _timeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        animateImageLayerView.translatesAutoresizingMaskIntoConstraints = NO;
+        _juhua.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        NSDictionary *viewsDic = NSDictionaryOfVariableBindings(_stateLabel, _timeLabel, animateImageLayerView);
+        
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-12-[_stateLabel]-10-[_timeLabel]" options:0 metrics:nil views:viewsDic]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-30-[animateImageLayerView(==imageWidth)]" options:0 metrics:@{@"imageWidth":@(image.size.width)} views:viewsDic]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[animateImageLayerView(==imageHeight)]" options:0 metrics:@{@"imageHeight":@(image.size.height)} views:viewsDic]];
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:animateImageLayerView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.juhua attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:self.juhua attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:animateImageLayerView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:_stateLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     }
     return self;
 }
@@ -71,29 +90,34 @@ static NSString * const HLYPullToRefreshUpdateTimeUserDefaultsKey = @"com.hly.us
     [self loadUpdateTime];
 }
 
+- (void)updateConstraints
+{
+    [super updateConstraints];
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
     [self.stateLabel sizeToFit];
-    [self.stateLabel hly_setCenterX:ceilf([self hly_width] / 2)];
-    [self.stateLabel hly_setTop:12];
-    
+//    [self.stateLabel hly_setCenterX:ceilf([self hly_width] / 2)];
+//    [self.stateLabel hly_setTop:12];
+//    
     [self.timeLabel sizeToFit];
-    [self.timeLabel hly_setCenterX:[self.stateLabel hly_centerX]];
-    [self.timeLabel hly_setTop:[self.stateLabel hly_bottom] + 10];
+//    [self.timeLabel hly_setCenterX:[self.stateLabel hly_centerX]];
+//    [self.timeLabel hly_setTop:[self.stateLabel hly_bottom] + 10];
+//    
+//    CGRect frame = self.animateImageLayer.frame;
+//    frame.origin.x = 30;
+//    frame.origin.y = ceilf(([self hly_height] - CGRectGetHeight(self.animateImageLayer.frame)) / 2);
+//    self.animateImageLayer.frame = frame;
+//    
+//    CGRect juhuaFrame = self.juhua.frame;
+//    juhuaFrame.origin.x = frame.origin.x + ceilf((frame.size.width - self.juhua.frame.size.width) / 2);
+//    juhuaFrame.origin.y = frame.origin.y + ceilf((frame.size.height - self.juhua.frame.size.height) / 2);
+//    self.juhua.frame = juhuaFrame;
     
-//    [self.animateImageView hly_setWidth:[self hly_width] - 20];
-//    [self.animateImageView hly_setHeight:[self.animateImageView hly_width]];
-    CGRect frame = self.animateImageLayer.frame;
-    frame.origin.x = 30;
-    frame.origin.y = ceilf(([self hly_height] - CGRectGetHeight(self.animateImageLayer.frame)) / 2);
-    self.animateImageLayer.frame = frame;
-    
-    CGRect juhuaFrame = self.juhua.frame;
-    juhuaFrame.origin.x = frame.origin.x + ceilf((frame.size.width - self.juhua.frame.size.width) / 2);
-    juhuaFrame.origin.y = frame.origin.y + ceilf((frame.size.height - self.juhua.frame.size.height) / 2);
-    self.juhua.frame = juhuaFrame;
+    [self setNeedsUpdateConstraints];
 }
 
 #pragma mark -

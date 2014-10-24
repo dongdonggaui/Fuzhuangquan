@@ -21,7 +21,10 @@
 @implementation HomeListCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    [super awakeFromNib];
+    
+    self.headImageView.layer.cornerRadius = 15;
+    self.headImageView.clipsToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

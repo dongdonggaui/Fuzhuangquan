@@ -12,6 +12,10 @@
 		064985F619F93D840040FCCB /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 064985F319F93D840040FCCB /* libWeChatSDK.a */; };
 		094E281619F9175F00502FE1 /* HomeRankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 094E281519F9175F00502FE1 /* HomeRankCell.m */; };
 		0955222C19F922450014E157 /* HomeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0955222B19F922450014E157 /* HomeListCell.m */; };
+		09C34B7C19F9F41F003BFF69 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C34B7B19F9F41F003BFF69 /* libz.1.1.3.dylib */; };
+		09C34B7E19F9F427003BFF69 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C34B7D19F9F427003BFF69 /* libstdc++.dylib */; };
+		09C34B8019F9F4C7003BFF69 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C34B7F19F9F4C7003BFF69 /* libsqlite3.dylib */; };
+		09C34B8219F9F4EB003BFF69 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C34B8119F9F4EB003BFF69 /* CoreTelephony.framework */; };
 		09F70D6B19F7D55B003B4E8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F70D6A19F7D55B003B4E8F /* main.m */; };
 		09F70D6E19F7D55B003B4E8F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F70D6D19F7D55B003B4E8F /* AppDelegate.m */; };
 		09F70D7019F7D55B003B4E8F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 09F70D6F19F7D55B003B4E8F /* Podfile */; };
@@ -33,7 +37,6 @@
 		09F70DA619F7D55B003B4E8F /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F70DA519F7D55B003B4E8F /* TencentOpenAPI.framework */; };
 		09F70DAA19F7D55B003B4E8F /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F70DA919F7D55B003B4E8F /* libWeiboSDK.a */; };
 		09F70DAC19F7D55B003B4E8F /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 09F70DAB19F7D55B003B4E8F /* WeiboSDK.bundle */; };
-		09F70DB019F7D55B003B4E8F /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F70DAF19F7D55B003B4E8F /* libWeChatSDK.a */; };
 		09F70DB419F7D55B003B4E8F /* HLYThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F70DB319F7D55B003B4E8F /* HLYThemeManager.m */; };
 		09F70DBA19F7D55B003B4E8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09F70DB819F7D55B003B4E8F /* Main.storyboard */; };
 		09F70DBC19F7D55B003B4E8F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F70DBB19F7D55B003B4E8F /* Images.xcassets */; };
@@ -66,12 +69,16 @@
 		094E281819F91C0C00502FE1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		0955222A19F922450014E157 /* HomeListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeListCell.h; path = ViewControllers/Home/HomeListCell.h; sourceTree = "<group>"; };
 		0955222B19F922450014E157 /* HomeListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeListCell.m; path = ViewControllers/Home/HomeListCell.m; sourceTree = "<group>"; };
+		09C34B7B19F9F41F003BFF69 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		09C34B7D19F9F427003BFF69 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		09C34B7F19F9F4C7003BFF69 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		09C34B8119F9F4EB003BFF69 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		09F70D6519F7D55B003B4E8F /* Fuzhuangquan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fuzhuangquan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F70D6919F7D55B003B4E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09F70D6A19F7D55B003B4E8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		09F70D6C19F7D55B003B4E8F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		09F70D6D19F7D55B003B4E8F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		09F70D6F19F7D55B003B4E8F /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; };
+		09F70D6F19F7D55B003B4E8F /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		09F70D7119F7D55B003B4E8F /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		09F70D7519F7D55B003B4E8F /* HLYViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HLYViewController.h; path = ViewControllers/Base/HLYViewController.h; sourceTree = "<group>"; };
 		09F70D7619F7D55B003B4E8F /* HLYViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HLYViewController.m; path = ViewControllers/Base/HLYViewController.m; sourceTree = "<group>"; };
@@ -124,9 +131,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09C34B8219F9F4EB003BFF69 /* CoreTelephony.framework in Frameworks */,
+				09C34B8019F9F4C7003BFF69 /* libsqlite3.dylib in Frameworks */,
+				09C34B7E19F9F427003BFF69 /* libstdc++.dylib in Frameworks */,
+				09C34B7C19F9F41F003BFF69 /* libz.1.1.3.dylib in Frameworks */,
 				09F70DA619F7D55B003B4E8F /* TencentOpenAPI.framework in Frameworks */,
 				09F70DAA19F7D55B003B4E8F /* libWeiboSDK.a in Frameworks */,
-				09F70DB019F7D55B003B4E8F /* libWeChatSDK.a in Frameworks */,
 				5893759A02EFEFB6B5CB6F1F /* libPods.a in Frameworks */,
 				064985F619F93D840040FCCB /* libWeChatSDK.a in Frameworks */,
 			);
@@ -383,6 +393,10 @@
 		7374882042EA6EE627AA2177 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				09C34B8119F9F4EB003BFF69 /* CoreTelephony.framework */,
+				09C34B7F19F9F4C7003BFF69 /* libsqlite3.dylib */,
+				09C34B7D19F9F427003BFF69 /* libstdc++.dylib */,
+				09C34B7B19F9F41F003BFF69 /* libz.1.1.3.dylib */,
 				15D65474FF020031C7D42856 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -677,6 +691,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CEF811CABCED593A1F7FA10E /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -689,6 +704,33 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Fuzhuangquan/Components/ShareManager/Weibo",
 					"$(PROJECT_DIR)/Fuzhuangquan/Components/ShareManager/Weixin",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-l\"Pods-AFNetworking\"",
+					"-l\"Pods-MMProgressHUD\"",
+					"-l\"Pods-NSLogger\"",
+					"-l\"Pods-SDWebImage\"",
+					"-l\"Pods-UIColor-Hex\"",
+					"-l\"Pods-UIImage+ImageWithColor\"",
+					"-l\"Pods-pop\"",
+					"-l\"c++\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -698,6 +740,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CB1D4357A74237B392A2289A /* Pods.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -710,6 +753,33 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Fuzhuangquan/Components/ShareManager/Weibo",
 					"$(PROJECT_DIR)/Fuzhuangquan/Components/ShareManager/Weixin",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-l\"Pods-AFNetworking\"",
+					"-l\"Pods-MMProgressHUD\"",
+					"-l\"Pods-NSLogger\"",
+					"-l\"Pods-SDWebImage\"",
+					"-l\"Pods-UIColor-Hex\"",
+					"-l\"Pods-UIImage+ImageWithColor\"",
+					"-l\"Pods-pop\"",
+					"-l\"c++\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

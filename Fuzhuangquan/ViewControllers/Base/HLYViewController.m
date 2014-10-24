@@ -112,8 +112,8 @@ const NSString *kNotificationControllerDidPushed = @"kNotificationControllerDidP
     return _hlyRightBarButtonItem;
 }
 
-- (HWDAppDelegate *)hly_appDelegate {
-    return (HWDAppDelegate *)[[UIApplication sharedApplication] delegate];
+- (AppDelegate *)hly_appDelegate {
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 - (NSUserDefaults *)hly_userDefaults
