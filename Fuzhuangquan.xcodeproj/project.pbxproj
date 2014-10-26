@@ -10,6 +10,8 @@
 		064985EA19F93AC40040FCCB /* FZQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 064985E919F93AC40040FCCB /* FZQViewController.m */; };
 		064985ED19F93ADF0040FCCB /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 064985EC19F93ADF0040FCCB /* HomeViewController.m */; };
 		064985F619F93D840040FCCB /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 064985F319F93D840040FCCB /* libWeChatSDK.a */; };
+		06588D0E19FB48280050D4EC /* TQSlideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06588D0D19FB48280050D4EC /* TQSlideViewController.m */; };
+		06588D1119FB4A320050D4EC /* TQSlideViewControllersSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 06588D1019FB4A320050D4EC /* TQSlideViewControllersSegue.m */; };
 		094E281619F9175F00502FE1 /* HomeRankCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 094E281519F9175F00502FE1 /* HomeRankCell.m */; };
 		0955222C19F922450014E157 /* HomeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0955222B19F922450014E157 /* HomeListCell.m */; };
 		09C34B7C19F9F41F003BFF69 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C34B7B19F9F41F003BFF69 /* libz.1.1.3.dylib */; };
@@ -63,6 +65,10 @@
 		064985F319F93D840040FCCB /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		064985F419F93D840040FCCB /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		064985F519F93D840040FCCB /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		06588D0C19FB48280050D4EC /* TQSlideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TQSlideViewController.h; path = ViewControllers/Base/TQSlideViewController.h; sourceTree = "<group>"; };
+		06588D0D19FB48280050D4EC /* TQSlideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TQSlideViewController.m; path = ViewControllers/Base/TQSlideViewController.m; sourceTree = "<group>"; };
+		06588D0F19FB4A320050D4EC /* TQSlideViewControllersSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TQSlideViewControllersSegue.h; path = ViewControllers/Base/TQSlideViewControllersSegue.h; sourceTree = "<group>"; };
+		06588D1019FB4A320050D4EC /* TQSlideViewControllersSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TQSlideViewControllersSegue.m; path = ViewControllers/Base/TQSlideViewControllersSegue.m; sourceTree = "<group>"; };
 		094E281419F9175F00502FE1 /* HomeRankCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeRankCell.h; path = ViewControllers/Home/HomeRankCell.h; sourceTree = "<group>"; };
 		094E281519F9175F00502FE1 /* HomeRankCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeRankCell.m; path = ViewControllers/Home/HomeRankCell.m; sourceTree = "<group>"; };
 		094E281719F91B7200502FE1 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
@@ -256,6 +262,10 @@
 				09F70D7619F7D55B003B4E8F /* HLYViewController.m */,
 				064985E819F93AC40040FCCB /* FZQViewController.h */,
 				064985E919F93AC40040FCCB /* FZQViewController.m */,
+				06588D0C19FB48280050D4EC /* TQSlideViewController.h */,
+				06588D0D19FB48280050D4EC /* TQSlideViewController.m */,
+				06588D0F19FB4A320050D4EC /* TQSlideViewControllersSegue.h */,
+				06588D1019FB4A320050D4EC /* TQSlideViewControllersSegue.m */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -562,7 +572,9 @@
 				0955222C19F922450014E157 /* HomeListCell.m in Sources */,
 				09F70D6E19F7D55B003B4E8F /* AppDelegate.m in Sources */,
 				09F70D8B19F7D55B003B4E8F /* TQTextField.m in Sources */,
+				06588D0E19FB48280050D4EC /* TQSlideViewController.m in Sources */,
 				09F70D8F19F7D55B003B4E8F /* HLYPullToRefreshLoadingView.m in Sources */,
+				06588D1119FB4A320050D4EC /* TQSlideViewControllersSegue.m in Sources */,
 				064985EA19F93AC40040FCCB /* FZQViewController.m in Sources */,
 				09F70DA119F7D55B003B4E8F /* TQShareManager.m in Sources */,
 				09F70DB419F7D55B003B4E8F /* HLYThemeManager.m in Sources */,

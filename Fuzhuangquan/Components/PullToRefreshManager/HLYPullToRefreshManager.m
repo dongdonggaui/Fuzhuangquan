@@ -17,9 +17,19 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
 
 @property (nonatomic, weak) UITableView *tableView;
 
+/**
+ *  用来保存footerView的约束，方便remove
+ */
+@property (nonatomic, strong) NSArray *footerViewTopConstraints;
+
 @end
 
 @implementation HLYPullToRefreshManager
+
+- (void)dealloc
+{
+    [_tableView removeObserver:self forKeyPath:@"contentSize" context:(__bridge void *)self];
+}
 
 - (instancetype)initWithTableView:(UITableView *)tableView
 {
@@ -61,7 +71,9 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
         [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_headerView(==_tableView)]-0-|" options:0 metrics:nil views:viewsDic]];
         [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_headerView(==headerHeight)]-0-|" options:0 metrics:metricsDic views:viewsDic]];
         [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_footerView(==_tableView)]-0-|" options:0 metrics:nil views:viewsDic]];
-        [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_footerView(==footerHeight)]" options:0 metrics:metricsDic views:viewsDic]];
+        [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_footerView(==footerHeight)]" options:0 metrics:metricsDic views:viewsDic]];
+        
+        [_tableView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:(__bridge void *)self];
     }
     
     return self;
@@ -106,7 +118,7 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
         _headerView = headerView;
         [_headerView hly_setBottom:0];
         [self.tableView addSubview:_headerView];
-        kHLYPullToRefreshHeaderHeight = [_headerView hly_height];
+        kHLYPullToRefreshHeaderHeight = [_headerView hly_height];   // 强制更新视图高度
     }
 }
 
@@ -179,6 +191,63 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
     self.footerView.updateTimeIdentifier = identifier;
 }
 
+- (void)updateRefreshViewState
+{
+    if (!self.tableView) {
+        return;
+    }
+    
+    CGFloat footerTop = MAX([self.tableView hly_height], self.tableView.contentSize.height);
+    
+    CGFloat offsetY = self.tableView.contentOffset.y;
+    CGFloat topBaseLine = -self.topLayoutGuide;
+    CGFloat topMaxLine = -self.topLayoutGuide - kHLYPullToRefreshHeaderHeight;
+    CGFloat bottomBaseLine = self.topLayoutGuide + footerTop - CGRectGetHeight(self.tableView.frame);
+    CGFloat bottomMaxLine = bottomBaseLine + kHLYPullToRefreshHeaderHeight;
+    
+    if (offsetY >= topBaseLine) {
+        self.headerView.state = HLYPullToRefreshStateHide;
+    } else if (offsetY < topBaseLine && offsetY > topMaxLine) {
+        NSLog(@"header is hide");
+        self.headerView.state = HLYPullToRefreshStateNormal;
+        NSLog(@"header is normal");
+    } else if (offsetY < topMaxLine) {
+        self.headerView.state = HLYPullToRefreshStatePulling;
+        NSLog(@"header is pulling");
+    } else if (offsetY > bottomBaseLine && offsetY < bottomMaxLine) {
+        self.footerView.state = HLYPullToRefreshStateNormal;
+        NSLog(@"footer is normal");
+    } else if (offsetY > bottomMaxLine) {
+        self.footerView.state = HLYPullToRefreshStatePulling;
+        NSLog(@"footer is pulling");
+    }
+}
+
+#pragma mark -
+#pragma mark - kvo
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context == (__bridge void *)self && object == self.tableView) {
+        // 设置kvo来观察table view 的 contentSize 以重新对 footerView 进行约束
+        NSLog(@"change --> %@", change);
+        CGSize newSize = [[change valueForKey:@"new"] CGSizeValue];
+        CGSize oldSize = [[change valueForKey:@"old"] CGSizeValue];
+        
+        if (oldSize.height != newSize.height) {
+            NSDictionary *viewsDic = @{@"footerView": self.footerView};
+            NSDictionary *metricDic = @{@"newFooterTop": @(newSize.height)};
+            if (self.footerViewTopConstraints) {
+                [self.tableView removeConstraints:self.footerViewTopConstraints];
+            }
+            self.footerViewTopConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(newFooterTop)-[footerView]" options:0 metrics:metricDic views:viewsDic];
+            [self.tableView addConstraints:self.footerViewTopConstraints];
+            [self.tableView setNeedsUpdateConstraints];
+            [self.tableView setContentOffset:CGPointZero animated:NO];
+            [self.tableView setContentOffset:CGPointMake(0, -self.topLayoutGuide) animated:NO];
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark - table view
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -228,10 +297,7 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
 #pragma mark - scroll view delegate
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    CGFloat footerTop = MAX([scrollView hly_height], scrollView.contentSize.height);
-    if ([self.footerView hly_top] < footerTop) {
-        [self.footerView hly_setTop:footerTop];
-    }
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -248,23 +314,29 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
         return;
     }
     
-    CGFloat footerTop = MAX([scrollView hly_height], scrollView.contentSize.height);
+    [self updateRefreshViewState];
     
-    CGFloat offsetY = scrollView.contentOffset.y;
-    CGFloat topBaseLine = -self.topLayoutGuide;
-    CGFloat topMaxLine = -self.topLayoutGuide - kHLYPullToRefreshHeaderHeight;
-    CGFloat bottomBaseLine = footerTop - CGRectGetHeight(scrollView.frame);
-    CGFloat bottomMaxLine = bottomBaseLine + kHLYPullToRefreshHeaderHeight;
-    
-    if (offsetY < topBaseLine && offsetY > topMaxLine) {
-        self.headerView.state = HLYPullToRefreshStateNormal;
-    } else if (offsetY < topMaxLine) {
-        self.headerView.state = HLYPullToRefreshStatePulling;
-    } else if (offsetY > bottomBaseLine && offsetY < bottomMaxLine) {
-        self.footerView.state = HLYPullToRefreshStateNormal;
-    } else if (offsetY > bottomMaxLine) {
-        self.footerView.state = HLYPullToRefreshStatePulling;
-    }
+    //    CGFloat footerTop = MAX([scrollView hly_height], scrollView.contentSize.height);
+    //
+    //    CGFloat offsetY = scrollView.contentOffset.y;
+    //    CGFloat topBaseLine = -self.topLayoutGuide;
+    //    CGFloat topMaxLine = -self.topLayoutGuide - kHLYPullToRefreshHeaderHeight;
+    //    CGFloat bottomBaseLine = self.topLayoutGuide + footerTop - CGRectGetHeight(scrollView.frame);
+    //    CGFloat bottomMaxLine = bottomBaseLine + kHLYPullToRefreshHeaderHeight;
+    //
+    //    if (offsetY < topBaseLine && offsetY > topMaxLine) {
+    //        self.headerView.state = HLYPullToRefreshStateNormal;
+    //        NSLog(@"header is normal");
+    //    } else if (offsetY < topMaxLine) {
+    //        self.headerView.state = HLYPullToRefreshStatePulling;
+    //        NSLog(@"header is pulling");
+    //    } else if (offsetY > bottomBaseLine && offsetY < bottomMaxLine) {
+    //        self.footerView.state = HLYPullToRefreshStateNormal;
+    //        NSLog(@"footer is normal");
+    //    } else if (offsetY > bottomMaxLine) {
+    //        self.footerView.state = HLYPullToRefreshStatePulling;
+    //        NSLog(@"footer is pulling");
+    //    }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
