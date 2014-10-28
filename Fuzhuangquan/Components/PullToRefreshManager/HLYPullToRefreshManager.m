@@ -205,9 +205,7 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
     CGFloat bottomBaseLine = self.topLayoutGuide + footerTop - CGRectGetHeight(self.tableView.frame);
     CGFloat bottomMaxLine = bottomBaseLine + kHLYPullToRefreshHeaderHeight;
     
-    if (offsetY >= topBaseLine) {
-        self.headerView.state = HLYPullToRefreshStateHide;
-    } else if (offsetY < topBaseLine && offsetY > topMaxLine) {
+    if (offsetY < topBaseLine && offsetY > topMaxLine) {
         self.headerView.state = HLYPullToRefreshStateNormal;
     } else if (offsetY < topMaxLine) {
         self.headerView.state = HLYPullToRefreshStatePulling;
@@ -215,6 +213,9 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
         self.footerView.state = HLYPullToRefreshStateNormal;
     } else if (offsetY > bottomMaxLine) {
         self.footerView.state = HLYPullToRefreshStatePulling;
+    } else {
+        self.headerView.state = HLYPullToRefreshStateHide;
+        self.footerView.state = HLYPullToRefreshStateHide;
     }
 }
 
@@ -310,28 +311,6 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
     }
     
     [self updateRefreshViewState];
-    
-    //    CGFloat footerTop = MAX([scrollView hly_height], scrollView.contentSize.height);
-    //
-    //    CGFloat offsetY = scrollView.contentOffset.y;
-    //    CGFloat topBaseLine = -self.topLayoutGuide;
-    //    CGFloat topMaxLine = -self.topLayoutGuide - kHLYPullToRefreshHeaderHeight;
-    //    CGFloat bottomBaseLine = self.topLayoutGuide + footerTop - CGRectGetHeight(scrollView.frame);
-    //    CGFloat bottomMaxLine = bottomBaseLine + kHLYPullToRefreshHeaderHeight;
-    //
-    //    if (offsetY < topBaseLine && offsetY > topMaxLine) {
-    //        self.headerView.state = HLYPullToRefreshStateNormal;
-    //        NSLog(@"header is normal");
-    //    } else if (offsetY < topMaxLine) {
-    //        self.headerView.state = HLYPullToRefreshStatePulling;
-    //        NSLog(@"header is pulling");
-    //    } else if (offsetY > bottomBaseLine && offsetY < bottomMaxLine) {
-    //        self.footerView.state = HLYPullToRefreshStateNormal;
-    //        NSLog(@"footer is normal");
-    //    } else if (offsetY > bottomMaxLine) {
-    //        self.footerView.state = HLYPullToRefreshStatePulling;
-    //        NSLog(@"footer is pulling");
-    //    }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
