@@ -100,22 +100,22 @@ static NSString * const HLYPullToRefreshUpdateTimeUserDefaultsKey = @"com.hly.us
     [super layoutSubviews];
     
     [self.stateLabel sizeToFit];
-//    [self.stateLabel hly_setCenterX:ceilf([self hly_width] / 2)];
-//    [self.stateLabel hly_setTop:12];
-//    
+    //    [self.stateLabel hly_setCenterX:ceilf([self hly_width] / 2)];
+    //    [self.stateLabel hly_setTop:12];
+    //
     [self.timeLabel sizeToFit];
-//    [self.timeLabel hly_setCenterX:[self.stateLabel hly_centerX]];
-//    [self.timeLabel hly_setTop:[self.stateLabel hly_bottom] + 10];
-//    
-//    CGRect frame = self.animateImageLayer.frame;
-//    frame.origin.x = 30;
-//    frame.origin.y = ceilf(([self hly_height] - CGRectGetHeight(self.animateImageLayer.frame)) / 2);
-//    self.animateImageLayer.frame = frame;
-//    
-//    CGRect juhuaFrame = self.juhua.frame;
-//    juhuaFrame.origin.x = frame.origin.x + ceilf((frame.size.width - self.juhua.frame.size.width) / 2);
-//    juhuaFrame.origin.y = frame.origin.y + ceilf((frame.size.height - self.juhua.frame.size.height) / 2);
-//    self.juhua.frame = juhuaFrame;
+    //    [self.timeLabel hly_setCenterX:[self.stateLabel hly_centerX]];
+    //    [self.timeLabel hly_setTop:[self.stateLabel hly_bottom] + 10];
+    //
+    //    CGRect frame = self.animateImageLayer.frame;
+    //    frame.origin.x = 30;
+    //    frame.origin.y = ceilf(([self hly_height] - CGRectGetHeight(self.animateImageLayer.frame)) / 2);
+    //    self.animateImageLayer.frame = frame;
+    //
+    //    CGRect juhuaFrame = self.juhua.frame;
+    //    juhuaFrame.origin.x = frame.origin.x + ceilf((frame.size.width - self.juhua.frame.size.width) / 2);
+    //    juhuaFrame.origin.y = frame.origin.y + ceilf((frame.size.height - self.juhua.frame.size.height) / 2);
+    //    self.juhua.frame = juhuaFrame;
     
     [self setNeedsUpdateConstraints];
 }
@@ -146,25 +146,29 @@ static NSString * const HLYPullToRefreshUpdateTimeUserDefaultsKey = @"com.hly.us
             
         case HLYPullToRefreshStateNormal: {
             
+            self.stateLabel.hidden = NO;
+            self.animateImageLayer.hidden = NO;
+            self.timeLabel.hidden = NO;
+            
             [self loadUpdateTime];
-			
-			if (_state == HLYPullToRefreshStateLoading) {
+            
+            if (_state == HLYPullToRefreshStateLoading) {
                 
                 [self updateRefreshTime];
                 
-			} else if (_state == HLYPullToRefreshStatePulling) {
-				[CATransaction begin];
-				[CATransaction setAnimationDuration:0.18];
-				self.animateImageLayer.transform = CATransform3DIdentity;
-				[CATransaction commit];
+            } else if (_state == HLYPullToRefreshStatePulling) {
+                [CATransaction begin];
+                [CATransaction setAnimationDuration:0.18];
+                self.animateImageLayer.transform = CATransform3DIdentity;
+                [CATransaction commit];
                 
             }
             
-            self.stateLabel.text = self.stateLabel.text = self.type == HLYPullToRefreshTypeRefresh ? self.normalLoadNewStatus : self.normalLoadMoreStatus;
+            self.stateLabel.text = self.type == HLYPullToRefreshTypeRefresh ? self.normalLoadNewStatus : self.normalLoadMoreStatus;
             
             [self.juhua stopAnimating];
             [CATransaction begin];
-			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+            [CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
             self.animateImageLayer.hidden = NO;
             self.animateImageLayer.transform = CATransform3DIdentity;
             [CATransaction commit];
@@ -173,22 +177,37 @@ static NSString * const HLYPullToRefreshUpdateTimeUserDefaultsKey = @"com.hly.us
         }
             
         case HLYPullToRefreshStatePulling:
-            self.stateLabel.text = self.stateLabel.text = self.type == HLYPullToRefreshTypeRefresh ? self.pullingLoadNewStatus : self.pullingLoadMoreStatus;
-			[CATransaction begin];
-			[CATransaction setAnimationDuration:0.18];
-			self.animateImageLayer.transform = CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
-			[CATransaction commit];
+            
+            self.stateLabel.hidden = NO;
+            self.animateImageLayer.hidden = NO;
+            self.timeLabel.hidden = NO;
+            
+            self.stateLabel.text = self.type == HLYPullToRefreshTypeRefresh ? self.pullingLoadNewStatus : self.pullingLoadMoreStatus;
+            [CATransaction begin];
+            [CATransaction setAnimationDuration:0.18];
+            self.animateImageLayer.transform = CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
+            [CATransaction commit];
             
             break;
             
         case HLYPullToRefreshStateLoading:
-            self.stateLabel.text = self.stateLabel.text = self.type == HLYPullToRefreshTypeRefresh ? self.loadingLoadNewStatus : self.loadingLoadMoreStatus;
+            
+            self.stateLabel.hidden = NO;
+            self.timeLabel.hidden = NO;
+            
+            self.stateLabel.text = self.type == HLYPullToRefreshTypeRefresh ? self.loadingLoadNewStatus : self.loadingLoadMoreStatus;
             [self.juhua startAnimating];
             self.animateImageLayer.hidden = YES;
             
             break;
             
+        case HLYPullToRefreshStateHide:
         default:
+            self.stateLabel.hidden = YES;
+            [self.juhua stopAnimating];
+            self.animateImageLayer.hidden = YES;
+            self.timeLabel.hidden = YES;
+            
             break;
     }
     _state = state;

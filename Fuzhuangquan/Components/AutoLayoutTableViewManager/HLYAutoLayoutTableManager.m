@@ -11,6 +11,10 @@
 @interface HLYAutoLayoutTableManager ()
 
 @property (nonatomic, weak) UITableView *tableView;
+
+/**
+ *  缓存cell模板，每个reuseIdentifier对应一个cell模板
+ */
 @property (nonatomic, strong) NSMutableDictionary *cellCache;
 
 @end
@@ -40,6 +44,9 @@
     return self;
 }
 
+/**
+ *  更新本地缓存的cell模板
+ */
 - (void)updateCell:(UITableViewCell *)cell forReuseIdentifier:(NSString *)identifier enforceable:(BOOL)isEnforceable
 {
     if (!cell || !identifier || identifier.length == 0) {
@@ -52,6 +59,9 @@
     }
 }
 
+/**
+ *  返回计算cell高度所需要的cell模板
+ */
 - (UITableViewCell *)cellAtIndexPath:(NSIndexPath *)indexPath reuseIdentfier:(NSString *)identifier
 {
     if (!indexPath) {
@@ -83,7 +93,7 @@
     // This is important so that we'll get the correct height for different table view widths, since our cell's
     // height depends on its width due to the multi-line UILabel word wrapping. Don't need to do this above in
     // -[tableView:cellForRowAtIndexPath:] because it happens automatically when the cell is used in the table view.
-    cell.bounds = CGRectMake(0, 0, self.tableView.bounds.size.width, cell.bounds.size.height);
+    //    cell.bounds = CGRectMake(0, 0, self.tableView.bounds.size.width, cell.bounds.size.height);
     // NOTE: if you are displaying a section index (e.g. alphabet along the right side of the table view), or
     // if you are using a grouped table view style where cells have insets to the edges of the table view,
     // you'll need to adjust the cell.bounds.size.width to be smaller than the full width of the table view we just

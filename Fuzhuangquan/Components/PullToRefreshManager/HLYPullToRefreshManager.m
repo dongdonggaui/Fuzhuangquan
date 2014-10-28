@@ -208,18 +208,13 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
     if (offsetY >= topBaseLine) {
         self.headerView.state = HLYPullToRefreshStateHide;
     } else if (offsetY < topBaseLine && offsetY > topMaxLine) {
-        NSLog(@"header is hide");
         self.headerView.state = HLYPullToRefreshStateNormal;
-        NSLog(@"header is normal");
     } else if (offsetY < topMaxLine) {
         self.headerView.state = HLYPullToRefreshStatePulling;
-        NSLog(@"header is pulling");
     } else if (offsetY > bottomBaseLine && offsetY < bottomMaxLine) {
         self.footerView.state = HLYPullToRefreshStateNormal;
-        NSLog(@"footer is normal");
     } else if (offsetY > bottomMaxLine) {
         self.footerView.state = HLYPullToRefreshStatePulling;
-        NSLog(@"footer is pulling");
     }
 }
 
