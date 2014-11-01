@@ -61,17 +61,25 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
         self.enableLoadMore = YES;
         self.topLayoutGuide = 0;
         
-        // constraints
-        _footerView.translatesAutoresizingMaskIntoConstraints = NO;
-        _headerView.translatesAutoresizingMaskIntoConstraints = NO;
-        NSDictionary *viewsDic = NSDictionaryOfVariableBindings(_footerView, _headerView, _tableView);
-        NSDictionary *metricsDic = @{@"headerHeight": @(kHLYPullToRefreshHeaderHeight),
-                                     @"footerHeight": @(kHLYPullToRefreshFooterHeight)};
-        
-        [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_headerView(==_tableView)]-0-|" options:0 metrics:nil views:viewsDic]];
-        [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_headerView(==headerHeight)]-0-|" options:0 metrics:metricsDic views:viewsDic]];
-        [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_footerView(==_tableView)]-0-|" options:0 metrics:nil views:viewsDic]];
-        [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_footerView(==footerHeight)]" options:0 metrics:metricsDic views:viewsDic]];
+        /**
+         *  iOS8以前的autoLayout对UITableView的addSubView方式添加的且设置
+         *  translatesAutoresizingMaskIntoConstraints为NO的子视图不兼容
+         *  故需判断系统版本，iOS8及以上版本使用AutoLayout约束，iOS8以下的版本
+         *  使用frame
+         */
+        if (![self ptrm_isBelowIOS8]) {
+            // constraints
+            _footerView.translatesAutoresizingMaskIntoConstraints = NO;
+            _headerView.translatesAutoresizingMaskIntoConstraints = NO;
+            NSDictionary *viewsDic = NSDictionaryOfVariableBindings(_footerView, _headerView, _tableView);
+            NSDictionary *metricsDic = @{@"headerHeight": @(kHLYPullToRefreshHeaderHeight),
+                                         @"footerHeight": @(kHLYPullToRefreshFooterHeight)};
+            
+            [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_headerView(==_tableView)]-0-|" options:0 metrics:nil views:viewsDic]];
+            [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_headerView(==headerHeight)]-0-|" options:0 metrics:metricsDic views:viewsDic]];
+            [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_footerView(==_tableView)]-0-|" options:0 metrics:nil views:viewsDic]];
+            [_tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_footerView(==footerHeight)]" options:0 metrics:metricsDic views:viewsDic]];
+        }
         
         [_tableView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:(__bridge void *)self];
     }
@@ -219,27 +227,40 @@ static CGFloat kHLYPullToRefreshFooterHeight = 60;
     }
 }
 
+- (BOOL)ptrm_isBelowIOS8
+{
+    return [UIDevice currentDevice].systemVersion.floatValue < 8;
+}
+
 #pragma mark -
 #pragma mark - kvo
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (context == (__bridge void *)self && object == self.tableView) {
         // 设置kvo来观察table view 的 contentSize 以重新对 footerView 进行约束
-        NSLog(@"change --> %@", change);
+        //        NSLog(@"change --> %@", change);
         CGSize newSize = [[change valueForKey:@"new"] CGSizeValue];
         CGSize oldSize = [[change valueForKey:@"old"] CGSizeValue];
         
         if (oldSize.height != newSize.height) {
             NSDictionary *viewsDic = @{@"footerView": self.footerView};
             NSDictionary *metricDic = @{@"newFooterTop": @(newSize.height)};
-            if (self.footerViewTopConstraints) {
-                [self.tableView removeConstraints:self.footerViewTopConstraints];
+            
+            if (![self ptrm_isBelowIOS8]) {
+                if (self.footerViewTopConstraints) {
+                    [self.tableView removeConstraints:self.footerViewTopConstraints];
+                }
+                self.footerViewTopConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(newFooterTop)-[footerView]" options:0 metrics:metricDic views:viewsDic];
+                [self.tableView addConstraints:self.footerViewTopConstraints];
+                [self.tableView setNeedsUpdateConstraints];
+            } else {
+                [self.headerView hly_setHeight:kHLYPullToRefreshHeaderHeight];
+                [self.headerView hly_setWidth:[self.tableView hly_width]];
+                [self.footerView hly_setHeight:kHLYPullToRefreshFooterHeight];
+                [self.footerView hly_setWidth:[self.tableView hly_width]];
             }
-            self.footerViewTopConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(newFooterTop)-[footerView]" options:0 metrics:metricDic views:viewsDic];
-            [self.tableView addConstraints:self.footerViewTopConstraints];
-            [self.tableView setNeedsUpdateConstraints];
-            [self.tableView setContentOffset:CGPointZero animated:NO];
-            [self.tableView setContentOffset:CGPointMake(0, -self.topLayoutGuide) animated:NO];
+            
+            [self.tableView setContentInset:UIEdgeInsetsMake(self.topLayoutGuide, 0, self.topLayoutGuide, 0)];
         }
     }
 }
