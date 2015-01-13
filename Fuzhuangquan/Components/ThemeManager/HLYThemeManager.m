@@ -74,15 +74,7 @@ NSString * const TQThemeManagerDidChangeThemeNotification = @"com.hly.thememanag
 
 - (UIImage *)placeholderImage1
 {
-//    return [[UIImage imageWithColor:[UIColor yellowColor]] resizableImageWithCapInsets:UIEdgeInsetsZero];
-    CGRect rect = CGRectMake(0, 0, 1, 1);
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(context, [[UIColor yellowColor] CGColor]);
-    CGContextFillRect(context, rect);
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return [img resizableImageWithCapInsets:UIEdgeInsetsZero];
+    return [UIImage imageWithColor:[UIColor orangeColor]];
 }
 
 - (UIImage *)placeholderImage2
@@ -102,7 +94,7 @@ NSString * const TQThemeManagerDidChangeThemeNotification = @"com.hly.thememanag
 
 - (UIImage *)placeholderImage5
 {
-    return nil;
+    return [UIImage imageWithColor:[UIColor cyanColor]];
 }
 
 - (UIColor *)numberOneColor

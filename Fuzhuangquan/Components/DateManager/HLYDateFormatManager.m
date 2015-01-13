@@ -11,6 +11,7 @@
 @interface HLYDateFormatManager ()
 
 @property (nonatomic, strong) NSDateFormatter *yearMothDayHourMinuteSecondFormater;
+@property (nonatomic, strong) NSDateFormatter *yMDFormater;
 
 @end
 
@@ -41,21 +42,34 @@
     return _yearMothDayHourMinuteSecondFormater;
 }
 
+- (NSDateFormatter *)yMDFormater
+{
+    if (!_yMDFormater) {
+        _yMDFormater = [[NSDateFormatter alloc] init];
+        _yMDFormater.dateFormat = @"yyyy/MM/dd";
+    }
+    
+    return _yMDFormater;
+}
+
 #pragma mark -
 #pragma mark - public
 - (NSString *)lapseTimeFormatFromDate:(NSDate *)date
 {
     NSDate *now = [NSDate date];
+    if (!date) {
+        date = now;
+    }
     NSTimeInterval timeLapse = [now timeIntervalSinceDate:date];
-    NSString *timeString = NSLocalizedStringFromTableInBundle(@"placeholder_lasttime", @"HLYDateFormatManager", [self hly_bundle], nil);;
+    NSString *timeString = nil;
     
     if (timeLapse < 180) {
-        timeString = [timeString stringByAppendingFormat:@" : %@", NSLocalizedStringFromTableInBundle(@"msg_justnow", @"HLYDateFormatManager", [self hly_bundle], nil)];
+        timeString = @"刚刚";
     } else if (timeLapse < 3600) {
-        NSString *lapse = NSLocalizedStringFromTableInBundle(@"placeholder_minutesbefore", @"HLYDateFormatManager", [self hly_bundle], nil);
-        timeString = [timeString stringByAppendingFormat:@" : %d %@", (int)ceilf(timeLapse / 60.), lapse];
+        NSString *lapse = @"分钟前";
+        timeString = [NSString stringWithFormat:@"%d %@", (int)ceilf(timeLapse / 60.), lapse];
     } else {
-        timeString = [timeString stringByAppendingFormat:@" : %@", [self.yearMothDayHourMinuteSecondFormater stringFromDate:date]];
+        timeString = [NSString stringWithFormat:@"%@", [self.yearMothDayHourMinuteSecondFormater stringFromDate:date]];
     }
     
     return timeString;
@@ -63,7 +77,16 @@
 
 - (NSString *)longDisplayStringFromDate:(NSDate *)date
 {
+    if (!date) {
+        date = [NSDate date];
+    }
+    
     return [self.yearMothDayHourMinuteSecondFormater stringFromDate:date];
+}
+
+- (NSString *)shortDisplayStringFromDate:(NSDate *)date
+{
+    return [self.yMDFormater stringFromDate:date];
 }
 
 #pragma mark -

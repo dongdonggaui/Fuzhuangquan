@@ -10,6 +10,6 @@
 #define Fuzhuangquan_Header_h
 
 #import "HLYThemeManager.h"
-
+#import <NSLogger.h>
 
 #endif

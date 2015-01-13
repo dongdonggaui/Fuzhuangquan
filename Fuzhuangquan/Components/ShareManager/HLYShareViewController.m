@@ -11,8 +11,8 @@
 
 @interface HLYShareViewController ()
 
-@property (nonatomic) UIImage *image;
-@property (nonatomic) NSString *text;
+@property (weak, nonatomic) UIImage *image;
+@property (weak, nonatomic) NSString *text;
 
 @property (nonatomic) UITextView *textView;
 @property (nonatomic) UIImageView *imageView;
@@ -66,8 +66,6 @@
     _imageView.clipsToBounds = YES;
     _imageView.image = self.image;
     [_imageBackgroundView addSubview:_imageView];
-    
-    self.navigationItem.rightBarButtonItem = self.hlyRightBarButtonItem;
 }
 
 - (void)viewDidAppear:(BOOL)animated

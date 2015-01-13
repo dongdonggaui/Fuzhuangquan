@@ -22,7 +22,14 @@ typedef NS_ENUM(NSUInteger, TQShareType) {
 - (void)setup;
 - (BOOL)handleOpenURL:(NSURL *)url;
 - (void)authWithType:(TQShareType)type;
-- (void)shareWithType:(TQShareType)type title:(NSString *)title detail:(NSString *)detail image:(UIImage *)image url:(NSString *)url;
+- (void)shareWithType:(TQShareType)type
+                title:(NSString *)title
+               detail:(NSString *)detail
+                image:(UIImage *)image
+             imageUrl:(NSURL *)imageUrl
+          relativeUrl:(NSURL *)relativeUrl;
+- (void)addShareCallbackNotificationObserver:(id)observer selector:(SEL)selector object:(id)object;
+- (void)removeShareCallbackNotificationObserver:(id)observer object:(id)object;
 
 - (NSString *)defaultShareTitle;
 - (NSString *)defaultShareDetail;
@@ -36,3 +43,5 @@ extern NSString * const TQShareManagerDidSendToWeixinSuccessNotification;
 extern NSString * const TQShareManagerDidSendToWeixinFailedNotification;
 extern NSString * const TQShareManagerDidSendToQQSuccessNotification;
 extern NSString * const TQShareManagerDidSendToQQFailedNotification;
+extern NSString * const TQShareManagerUserCancelAuthNotification;
+extern NSString * const TQShareManagerUserCancelShareNotification;

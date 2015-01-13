@@ -11,7 +11,7 @@
 #import "HomeRankCell.h"
 #import "HomeListCell.h"
 
-#import "HLYPullToRefreshManager.h"
+#import "HLYTableViewPullToRefreshManager.h"
 #import "HLYAutoLayoutTableManager.h"
 
 @interface HomeViewController () <UITableViewDataSource>
@@ -19,8 +19,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 //
-@property (nonatomic, strong) HLYPullToRefreshManager *tableManager;
-@property (nonatomic, strong) HLYAutoLayoutTableManager *tableLayoutManager;
+@property (nonatomic, strong) HLYTableViewPullToRefreshManager *pullToRefreshManager;
+@property (nonatomic, strong) HLYAutoLayoutTableManager *autoLayoutTableManager;
 
 @end
 
@@ -30,15 +30,15 @@
     [super viewDidLoad];
 
     [self h_setupUI];
+    
+    self.tableView.backgroundColor = [UIColor orangeColor];
 }
 
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
     
-    if ([self respondsToSelector:@selector(topLayoutGuide)]) {
-        self.tableManager.topLayoutGuide = [self.topLayoutGuide length];
-    }
+    [self.pullToRefreshManager updateLayoutGuidesWithViewController:self];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -61,9 +61,8 @@
     self.tableView.dataSource = self;
     
     // 配置自动布局
-    self.tableLayoutManager = [[HLYAutoLayoutTableManager alloc] initWithTableView:self.tableView];
-    self.tableLayoutManager.cellAtIndexPath = ^UITableViewCell *(NSIndexPath *indexPath) {
-        
+    self.autoLayoutTableManager = [[HLYAutoLayoutTableManager alloc] initWithTableView:self.tableView];
+    self.autoLayoutTableManager.cellAtIndexPath = ^UITableViewCell *(UITableView *tableView, NSIndexPath *indexPath) {
         UITableViewCell *cell = nil;
         NSString *reuseIdentifier = nil;
         
@@ -86,45 +85,42 @@
         }
         
         return cell;
+    };
+    self.autoLayoutTableManager.configureCellAtIndexPath = ^void (UITableViewCell *tableViewCell, NSIndexPath *indexPath, BOOL forHeightCaculate) {
+        if (!tableViewCell || !indexPath) {
+            return;
+        }
         
+        if (indexPath.section == 0) {
+            
+            [(HomeRankCell *)tableViewCell configureCellWithPatternMakerImage:nil patternMakerTitle:@"打版师榜" factoryImage:nil factoryTitle:@"代工厂榜" retailerImage:nil retailerTitle:@"销售商榜"];
+            
+        } else {
+            
+            HomeListCell *theCell = (HomeListCell *)tableViewCell;
+            
+            [theCell configureCellWithHeadPath:nil name:@"黄师傅" city:@"广东-广州" rate:@"100"];
+        }
     };
     
     // 配置下拉刷新
-    self.tableManager = [[HLYPullToRefreshManager alloc] initWithTableView:self.tableView];
-    self.tableManager.cellHeightForTableViewAtIndexPath = ^CGFloat (UITableView *tableView, NSIndexPath *indexPath) {
+    self.pullToRefreshManager = [[HLYTableViewPullToRefreshManager alloc] initWithTableView:self.tableView];
+    self.pullToRefreshManager.cellHeightForTableViewAtIndexPath = ^CGFloat (UITableView *tableView, NSIndexPath *indexPath) {
         if (indexPath.row == 0) {
             return 160;
         } else {
             return 138;
         }
     };
-    self.tableManager.didSelectedTableViewAtIndexPath = ^void (UITableView *tableView, NSIndexPath *indexPath) {
+    self.pullToRefreshManager.didSelectedTableViewAtIndexPath = ^void (UITableView *tableView, NSIndexPath *indexPath) {
         
     };
-    self.tableManager.headerView.stateLabel.textColor = [ThemeColor numberThreeColor];
-    self.tableManager.footerView.stateLabel.textColor = [ThemeColor numberThreeColor];
-    self.tableManager.enableLoadMore = NO;
+    self.pullToRefreshManager.enableLoadMore = NO;
 }
 
 - (void)h_updateUI
 {
     // 更新自动布局
-    self.tableLayoutManager.configureCellAtIndexPath = ^void (UITableViewCell *cell, NSIndexPath *indexPath) {
-        if (!cell || !indexPath) {
-            return;
-        }
-        
-        if (indexPath.section == 0) {
-            
-            [(HomeRankCell *)cell configureCellWithPatternMakerImage:nil patternMakerTitle:@"打版师榜" factoryImage:nil factoryTitle:@"代工厂榜" retailerImage:nil retailerTitle:@"销售商榜"];
-            
-        } else {
-            
-            HomeListCell *theCell = (HomeListCell *)cell;
-            
-            [theCell configureCellWithHeadPath:nil name:@"黄师傅" city:@"广东-广州" rate:@"100"];
-        }
-    };
     
     [self.tableView reloadData];
 }
@@ -163,11 +159,11 @@
         
     }
     
-    if (self.tableLayoutManager.cellAtIndexPath) {
-        cell = self.tableLayoutManager.cellAtIndexPath(indexPath);
+    if (self.autoLayoutTableManager.cellAtIndexPath) {
+        cell = self.autoLayoutTableManager.cellAtIndexPath(tableView, indexPath);
         
-        if (self.tableLayoutManager.configureCellAtIndexPath) {
-            self.tableLayoutManager.configureCellAtIndexPath(cell, indexPath);
+        if (self.autoLayoutTableManager.configureCellAtIndexPath) {
+            self.autoLayoutTableManager.configureCellAtIndexPath(cell, indexPath, NO);
         }
     }
     

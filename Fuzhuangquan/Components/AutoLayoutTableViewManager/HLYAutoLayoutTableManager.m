@@ -10,6 +10,7 @@
 
 @interface HLYAutoLayoutTableManager ()
 
+//FIXME: assign -> weak
 @property (nonatomic, weak) UITableView *tableView;
 
 /**
@@ -21,10 +22,6 @@
 
 @implementation HLYAutoLayoutTableManager
 
-- (void)dealloc
-{
-    self.cellCache = nil;
-}
 
 - (instancetype)init
 {
@@ -69,8 +66,8 @@
     }
     
     UITableViewCell *cell = [self.cellCache objectForKey:identifier];
-    if (!cell && self.cellAtIndexPath) {
-        cell = self.cellAtIndexPath(indexPath);
+    if (!cell && self.tableView && self.cellAtIndexPath) {
+        cell = self.cellAtIndexPath(self.tableView, indexPath);
         [self updateCell:cell forReuseIdentifier:identifier enforceable:YES];
     }
     
@@ -79,10 +76,14 @@
 
 - (CGFloat)heightForCellAtIndexPath:(NSIndexPath *)indexPath reuseIdentfier:(NSString *)identifier
 {
+    if (!indexPath || !identifier) {
+        return 0;
+    }
+    
     UITableViewCell *cell = [self cellAtIndexPath:indexPath reuseIdentfier:identifier];
     
     if (self.configureCellAtIndexPath) {
-        self.configureCellAtIndexPath(cell, indexPath);
+        self.configureCellAtIndexPath(cell, indexPath, YES);
     }
     
     // Make sure the constraints have been added to this cell, since it may have just been created from scratch
@@ -93,7 +94,7 @@
     // This is important so that we'll get the correct height for different table view widths, since our cell's
     // height depends on its width due to the multi-line UILabel word wrapping. Don't need to do this above in
     // -[tableView:cellForRowAtIndexPath:] because it happens automatically when the cell is used in the table view.
-    //    cell.bounds = CGRectMake(0, 0, self.tableView.bounds.size.width, cell.bounds.size.height);
+    cell.bounds = CGRectMake(0, 0, self.tableView.bounds.size.width, cell.bounds.size.height);
     // NOTE: if you are displaying a section index (e.g. alphabet along the right side of the table view), or
     // if you are using a grouped table view style where cells have insets to the edges of the table view,
     // you'll need to adjust the cell.bounds.size.width to be smaller than the full width of the table view we just
@@ -113,7 +114,7 @@
     // of the cell's contentView and the bottom of the table view cell.
     height += 1;
     
-    NSLog(@"height in manager --> %f", height);
+//    NSLog(@"height in manager --> %f", height)
     
     return height;
 }

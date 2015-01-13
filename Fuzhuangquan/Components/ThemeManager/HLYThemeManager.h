@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
 #ifndef ThemeImage
 #define ThemeImage [HLYThemeManager sharedInstance]
