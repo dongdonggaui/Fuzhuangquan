@@ -28,10 +28,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = NSLocalizedString(@"推荐", @"推荐");
 
     [self h_setupUI];
-    
-    self.tableView.backgroundColor = [UIColor orangeColor];
 }
 
 - (void)viewDidLayoutSubviews

@@ -81,6 +81,11 @@
 		09C34B7E19F9F427003BFF69 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C34B7D19F9F427003BFF69 /* libstdc++.dylib */; };
 		09C34B8019F9F4C7003BFF69 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C34B7F19F9F4C7003BFF69 /* libsqlite3.dylib */; };
 		09C34B8219F9F4EB003BFF69 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C34B8119F9F4EB003BFF69 /* CoreTelephony.framework */; };
+		09C820D91A6683A7001225F9 /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C820D81A6683A7001225F9 /* DiscoveryViewController.m */; };
+		09C820DD1A668416001225F9 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C820DC1A668416001225F9 /* MineViewController.m */; };
+		09C820E11A668587001225F9 /* ThreeGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C820E01A668587001225F9 /* ThreeGridCell.m */; };
+		09C820E31A668593001225F9 /* ThreeGridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09C820E21A668593001225F9 /* ThreeGridCell.xib */; };
+		09C820E81A6686CE001225F9 /* TQAutoLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C820E71A6686CE001225F9 /* TQAutoLayoutView.m */; };
 		09F70D6B19F7D55B003B4E8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F70D6A19F7D55B003B4E8F /* main.m */; };
 		09F70D6E19F7D55B003B4E8F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F70D6D19F7D55B003B4E8F /* AppDelegate.m */; };
 		09F70D7019F7D55B003B4E8F /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 09F70D6F19F7D55B003B4E8F /* Podfile */; };
@@ -244,6 +249,15 @@
 		09C34B7D19F9F427003BFF69 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		09C34B7F19F9F4C7003BFF69 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		09C34B8119F9F4EB003BFF69 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		09C820D71A6683A7001225F9 /* DiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryViewController.h; sourceTree = "<group>"; };
+		09C820D81A6683A7001225F9 /* DiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryViewController.m; sourceTree = "<group>"; };
+		09C820DB1A668416001225F9 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
+		09C820DC1A668416001225F9 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
+		09C820DF1A668587001225F9 /* ThreeGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreeGridCell.h; sourceTree = "<group>"; };
+		09C820E01A668587001225F9 /* ThreeGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreeGridCell.m; sourceTree = "<group>"; };
+		09C820E21A668593001225F9 /* ThreeGridCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThreeGridCell.xib; sourceTree = "<group>"; };
+		09C820E61A6686CE001225F9 /* TQAutoLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TQAutoLayoutView.h; sourceTree = "<group>"; };
+		09C820E71A6686CE001225F9 /* TQAutoLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TQAutoLayoutView.m; sourceTree = "<group>"; };
 		09F70D6519F7D55B003B4E8F /* Fuzhuangquan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fuzhuangquan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F70D6919F7D55B003B4E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09F70D6A19F7D55B003B4E8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -512,6 +526,7 @@
 		09BE7F581A65168D00DFA998 /* TQUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				09C820E51A66869A001225F9 /* AutoLayoutView */,
 				09BE7F591A65168D00DFA998 /* AutoLayoutImageView */,
 				09BE7F5C1A65168D00DFA998 /* AutoLayoutMultiLineLabel */,
 				09BE7F5F1A65168D00DFA998 /* DemonstrateView */,
@@ -663,6 +678,46 @@
 			path = TableTextView;
 			sourceTree = "<group>";
 		};
+		09C820D61A668388001225F9 /* Discovery */ = {
+			isa = PBXGroup;
+			children = (
+				09C820DE1A66853B001225F9 /* Cells */,
+				09C820D71A6683A7001225F9 /* DiscoveryViewController.h */,
+				09C820D81A6683A7001225F9 /* DiscoveryViewController.m */,
+			);
+			name = Discovery;
+			path = ViewControllers/Discovery;
+			sourceTree = "<group>";
+		};
+		09C820DA1A668402001225F9 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				09C820DB1A668416001225F9 /* MineViewController.h */,
+				09C820DC1A668416001225F9 /* MineViewController.m */,
+			);
+			name = Mine;
+			path = ViewControllers/Mine;
+			sourceTree = "<group>";
+		};
+		09C820DE1A66853B001225F9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				09C820DF1A668587001225F9 /* ThreeGridCell.h */,
+				09C820E01A668587001225F9 /* ThreeGridCell.m */,
+				09C820E21A668593001225F9 /* ThreeGridCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		09C820E51A66869A001225F9 /* AutoLayoutView */ = {
+			isa = PBXGroup;
+			children = (
+				09C820E61A6686CE001225F9 /* TQAutoLayoutView.h */,
+				09C820E71A6686CE001225F9 /* TQAutoLayoutView.m */,
+			);
+			path = AutoLayoutView;
+			sourceTree = "<group>";
+		};
 		09F70D5C19F7D55B003B4E8F = {
 			isa = PBXGroup;
 			children = (
@@ -717,6 +772,8 @@
 				09F70D7419F7D55B003B4E8F /* Base */,
 				094E281219F9154300502FE1 /* Common */,
 				094E281319F9171500502FE1 /* Home */,
+				09C820D61A668388001225F9 /* Discovery */,
+				09C820DA1A668402001225F9 /* Mine */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -860,6 +917,7 @@
 				09BE7FC61A65168D00DFA998 /* alert_warning.png in Resources */,
 				09BE7FAC1A65168D00DFA998 /* HLYPullToRefreshManager.bundle in Resources */,
 				09F70DBC19F7D55B003B4E8F /* Images.xcassets in Resources */,
+				09C820E31A668593001225F9 /* ThreeGridCell.xib in Resources */,
 				09F70DBF19F7D55B003B4E8F /* LaunchScreen.xib in Resources */,
 				09BE7FB41A65168D00DFA998 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				09F70DBA19F7D55B003B4E8F /* Main.storyboard in Resources */,
@@ -926,11 +984,14 @@
 				09BE7FC11A65168D00DFA998 /* NSTimer+Addition.m in Sources */,
 				09BE7FD71A65168D00DFA998 /* UITextField+HitTest.m in Sources */,
 				09BE7FCF1A65168D00DFA998 /* TQImageItemView.m in Sources */,
+				09C820D91A6683A7001225F9 /* DiscoveryViewController.m in Sources */,
 				09BE7FAB1A65168D00DFA998 /* HLYPullToRefreshLoadingView.m in Sources */,
 				09BE7FA51A65168D00DFA998 /* TQEmailInputValidator.m in Sources */,
 				09BE7FAA1A65168D00DFA998 /* HLYCollectionViewPullToRefreshManager.m in Sources */,
 				09BE7F981A65168D00DFA998 /* HLYAutoLayoutTableManager.m in Sources */,
 				09BE7FAE1A65168D00DFA998 /* HLYTableViewPullToRefreshManager.m in Sources */,
+				09C820E11A668587001225F9 /* ThreeGridCell.m in Sources */,
+				09C820E81A6686CE001225F9 /* TQAutoLayoutView.m in Sources */,
 				09BE7FBB1A65168D00DFA998 /* HLYThemeManager.m in Sources */,
 				09BE7FD51A65168D00DFA998 /* TQTableViewCell.m in Sources */,
 				09BE7FA31A65168D00DFA998 /* HLYNumericInputValidator.m in Sources */,
@@ -943,6 +1004,7 @@
 				09BE7FC81A65168D00DFA998 /* TQDropList.m in Sources */,
 				09BE7FB11A65168D00DFA998 /* UIView+Frame.m in Sources */,
 				09BE7FCB1A65168D00DFA998 /* TQSimpleGridView.m in Sources */,
+				09C820DD1A668416001225F9 /* MineViewController.m in Sources */,
 				09BE7FC31A65168D00DFA998 /* DGActionSheet.m in Sources */,
 				09BE7FCD1A65168D00DFA998 /* TQGroupedTableView.m in Sources */,
 				09BE7F991A65168D00DFA998 /* HLYCache.m in Sources */,
