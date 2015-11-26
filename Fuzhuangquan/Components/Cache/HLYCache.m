@@ -1,6 +1,6 @@
 //
 //  HLYCache.m
-//  laohu
+//  TQFramework
 //
 //  Created by huangluyang on 14-7-29.
 //  Copyright (c) 2014年 CTQ. All rights reserved.
