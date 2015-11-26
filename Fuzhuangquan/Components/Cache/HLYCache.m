@@ -3,7 +3,7 @@
 //  laohu
 //
 //  Created by huangluyang on 14-7-29.
-//  Copyright (c) 2014年 wanmei. All rights reserved.
+//  Copyright (c) 2014年 CTQ. All rights reserved.
 //
 
 #import <CommonCrypto/CommonDigest.h>
